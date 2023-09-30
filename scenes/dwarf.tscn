@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://c80fvbsglni3n"]
+
+[ext_resource type="Texture2D" uid="uid://68luryt7s70h" path="res://assets/images/test_dwarf.png" id="1_pvw3n"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_atarx"]
+
+[node name="Dwarf" type="Node2D"]
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+shape = SubResource("RectangleShape2D_atarx")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_pvw3n")

@@ -1,3 +1,16 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1696025685
+::res://::1696043419
 icon.svg::CompressedTexture2D::8846930954027897429::1695873383::1695873403::1::::<><>::
+::res://assets/::1696041717
+::res://assets/images/::1696043419
+test_dwarf.png::CompressedTexture2D::2244683152340545097::1696043184::1696043190::1::::<><>::
+test_tile.png::CompressedTexture2D::6809519811067353696::1696042388::1696042395::1::::<><>::
+::res://assets/images/ui/::1696043419
+selector.png::CompressedTexture2D::870886461183694823::1696043408::1696043419::1::::<><>::
+::res://assets/music/::1696041706
+::res://assets/sounds/::1696041700
+::res://scenes/::1696043297
+dwarf.tscn::PackedScene::7141023818546263357::1696043297::0::1::::<><>::uid://68luryt7s70h::::res://assets/images/test_dwarf.png
+main.tscn::PackedScene::6836106788566210268::1696042995::0::1::::<><>::uid://n7ay4g8vkpvq::::res://scenes/world.tscn<>uid://c4at2cv5weenw::::res://assets/images/test_tile.png<>uid://c80fvbsglni3n::::res://scenes/dwarf.tscn
+world.tscn::PackedScene::978559448451875158::1696041676::0::1::::<><>::
+::res://scripts/::1696041691
