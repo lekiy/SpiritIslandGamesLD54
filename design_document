@@ -1,0 +1,62 @@
+Ludum Dare 54 Theme: "Limited Space"
+
+Theme breakdown:
+
+    Limited could mean: Restricted, Pressurized, A small amount,
+    Space could mean: A location, Volume, Slots, Container, Membership
+
+Ideas: 1. An Arena style game where you have a grid of squares
+where each round you get a set of difences that have different 2d shapes that you have to place
+to maximize your ability to fight against the onslaught.
+
+    2. A Rouge-like where your a dwarf in a mine and you have a backpack which you use to store what you collect but each item has its own shape so you have to carefully try to fit everything.
+
+    3. A island colony survival game where the resources of a small island can only sustain so many people. try to avoid socialital collapse.
+
+    4. A puzzle platformer where you have to either absorb or release object to change your size to progress through the level. (examples: gather objects to increase weight and size to either get over gaps, or push switches, or release objects so you can fit in smaller spaces or avoid pressing switches you dont want to)
+
+Chosen Idea:
+
+    You control a group of dwarves mining for treasure but the caves are a dangerous place. if you mine to wide you will cause caveins, and if you mine too deep you will awaken terrifying creatures lurking in the darkness.
+
+    Things the game needs
+
+        Dwarves (controlled RTS style):
+            Types: (low priority)
+                Worker Dwarf: can fight but weak, dig region, carry stuff or build structure.
+                Battle Dwarf: Stronger Fighter, Weak digger, cannot carry stuff
+                (Medical Dwarf): Heals injured dwarves, cannot fight, weak digger, slower carrier
+
+        Monsters Will try to attack dwarves and structures.
+            Types: (low priority)
+                (Belrog): just because
+                Skeletons
+                Bats
+                (Goblins): Faster and fights as groups
+                (Lich): Can resurrect dead dwarves to attack
+
+        Structures built by dwarves have specific functions
+            Types: (low priority)
+                Lifts: this is the most important structure which you will start with, will spawn dwarves over time. will also be where you have to bring treasures for money
+                Smeltery: Used to upgrade Dwarves Equipment
+                (Survival Support Structures): Beds for rest, Cookpot for refulling hunger
+                (Minecart Rails): can be used to make transporting materials easier
+                Supports: Stops cave-ins.
+
+        Environments: and hazards [Works as biomes not levels]
+            Natural Cave:
+                Water Pools
+                (Poisonus Mushrooms)
+            (Ancient Runes)
+                (Ritual Sites)
+            (Overgrown Caves)
+                (Rapid Growing Vines)
+                (Carnivours Plants)
+            (Lava Caverns)
+                (Lava Pools)
+
+        Treasures:
+            Presious Metal Vanes: Most basic form of valuble, Gold, Silver, Iron
+            (Treasure Chests): can contain gold or other treasures
+            (Gem Deposits): Worth more then gold
+            (Artifacts): Maybe worth gold maybe usable to power up dwarves/structures
