@@ -20,15 +20,15 @@ Chosen Idea:
     You control a group of dwarves mining for treasure but the caves are a dangerous place. if you mine to wide you will cause caveins, and if you mine too deep you will awaken terrifying creatures lurking in the darkness.
 
     Things the game needs
-
+    (in parenthises = low priority)
         Dwarves (controlled RTS style):
-            Types: (low priority)
+            Types:
                 Worker Dwarf: can fight but weak, dig region, carry stuff or build structure.
                 Battle Dwarf: Stronger Fighter, Weak digger, cannot carry stuff
                 (Medical Dwarf): Heals injured dwarves, cannot fight, weak digger, slower carrier
 
         Monsters Will try to attack dwarves and structures.
-            Types: (low priority)
+            Types:
                 (Belrog): just because
                 Skeletons
                 Bats
@@ -36,7 +36,7 @@ Chosen Idea:
                 (Lich): Can resurrect dead dwarves to attack
 
         Structures built by dwarves have specific functions
-            Types: (low priority)
+            Types:
                 Lifts: this is the most important structure which you will start with, will spawn dwarves over time. will also be where you have to bring treasures for money
                 Smeltery: Used to upgrade Dwarves Equipment
                 (Survival Support Structures): Beds for rest, Cookpot for refulling hunger
