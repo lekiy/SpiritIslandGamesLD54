@@ -1,11 +1,123 @@
-extends Node2D
+extends CharacterBody2D
+
+@export var selected := false
+@export var move_speed := 50
+@export var dig_strength := 2
+@export var dig_speed := 1
+
+@onready var click_region : Area2D = $ClickRegion
+@onready var selector_sprite : Sprite2D = $Selector
+@onready var world : TileMap = get_parent()
+@onready var sprite = $Sprite2D
+
+const WALL_TEX_COORD = Vector2i(1, 1)
+const FLOOR_TEX_COORD = Vector2i(1, 4)
+
+enum action {
+	IDLE,
+	ATTACK,
+	MOVE,
+	DIG,
+}
+
+var path = []
+var has_path = false
+var path_index = 0
+var lifetime = 0;
+var mouse_over = false;
+var action_state = action.IDLE
+var can_dig = true
+var dig_target
+
+func _input(event):
+	if(event is InputEventMouse):
+		if event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT:
+			if(mouse_over):
+				selected = true
+				selector_sprite.visible = true
+			else:
+				selected = false;
+				selector_sprite.visible = false
+			
+		if event.is_pressed() and event.button_index == MOUSE_BUTTON_RIGHT and selected:
+			var target_pos : Vector2 = get_parent().get_node("PlayerController").position + event.position
+			
+			var tile = world.get_tile(target_pos)
+			var tile_health = tile.get_custom_data("Durability")
+			print(tile_health)
+			if(tile_health):
+				dig_target = target_pos
+				
+			action_state = action.MOVE
+			set_move_path(target_pos)
+				
+
+		
+func set_move_path(target):
+	path = world.get_move_path(position, target)
+	if(path.size() > 0):
+		has_path = true
+		path_index = 0
+	else:
+		has_path = false;
+		velocity = Vector2.ZERO
+
+func check_state():
+	print("action_state", action_state)
+	print("dig_target", dig_target)
+	print("can_dig", can_dig)
 
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+func _physics_process(delta):
+
+	if(Input.is_action_just_pressed("check_state")):
+		check_state()
+	lifetime+=1;
+
+	match action_state:
+		action.IDLE:
+			velocity = Vector2.ZERO
+		action.MOVE:
+			if(has_path):
+				velocity = follow_path()*move_speed
+				sprite.rotation = deg_to_rad(pingpong(lifetime*2, 20)-10)
+			else:
+				sprite.rotation = 0
+				if(dig_target):
+					action_state = action.DIG
+				else:
+					action_state = action.IDLE
+		action.DIG:
+			if(!dig_target):
+				action_state = action.IDLE
+			elif(can_dig):
+				var remainder = world.dig_tile(dig_target, dig_strength)
+				# print("remainder", remainder)
+				can_dig = false;
+				await get_tree().create_timer(dig_speed).timeout
+				can_dig = true
+				
+				if(remainder <= 0):
+					dig_target = null
+					action_state = action.IDLE
+	
+
+	move_and_slide()
+
+func follow_path():
+	var target_point = path[path_index]
+	var direction = position.direction_to(target_point)
+	if(position.distance_to(target_point) < 3):
+		path_index+=1;
+		if(path_index >= path.size()):
+			has_path = false;
+			path_index = 0;
+			direction = Vector2.ZERO
+	return direction;
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+func _on_click_region_mouse_exited():
+	mouse_over = false
+
+func _on_click_region_mouse_entered():
+	mouse_over = true

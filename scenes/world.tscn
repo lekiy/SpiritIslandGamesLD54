@@ -1,4 +1,24 @@
-[gd_scene format=3 uid="uid://n7ay4g8vkpvq"]
+[gd_scene load_steps=5 format=3 uid="uid://lejtkiexy4a1"]
+
+[ext_resource type="TileSet" uid="uid://da16geot1w31a" path="res://assets/images/cave_tileset.tres" id="1_4wutc"]
+[ext_resource type="Script" path="res://scripts/world.gd" id="2_vo4iv"]
+[ext_resource type="PackedScene" uid="uid://ba57vgu422vlw" path="res://scenes/player_controller.tscn" id="2_y7qcx"]
+[ext_resource type="PackedScene" uid="uid://c80fvbsglni3n" path="res://scenes/dwarf.tscn" id="3_fub8i"]
 
 [node name="World" type="TileMap"]
+tile_set = ExtResource("1_4wutc")
+cell_quadrant_size = 20
 format = 2
+script = ExtResource("2_vo4iv")
+map_width = 26
+map_height = 26
+
+[node name="PlayerController" parent="." instance=ExtResource("2_y7qcx")]
+
+[node name="Dwarf" parent="." instance=ExtResource("3_fub8i")]
+position = Vector2(-26, 8)
+
+[node name="Line2D" type="Line2D" parent="."]
+width = 5.0
+default_color = Color(1, 1, 1, 0.360784)
+joint_mode = 2

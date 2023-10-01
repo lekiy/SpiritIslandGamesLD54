@@ -1,0 +1,150 @@
+extends TileMap
+
+@export var map_width = 500
+@export var map_height = 500
+@export var map_border: Rect2
+
+const MAIN_LAYER = 0
+const ATLAS = 0
+
+const WALL_TEX_COORD = Vector2i(1, 1)
+const FLOOR_TEX_COORD = Vector2i(1, 4)
+const CELL_SIZE = 20
+
+@onready var dwarf := $Dwarf
+@onready var player := $PlayerController
+@onready var line = $Line2D
+@onready var astar = AStarGrid2D.new()
+@onready var minimap_scene := preload("res://scenes/minimap.tscn")
+@onready var spawn_scene := preload("res://scenes/spawn_cave.tscn")
+
+var tile_durability_matrix;
+
+const dirs = [Vector2.UP, Vector2.DOWN, Vector2.LEFT, Vector2.RIGHT]
+
+var minimap
+
+var cave_noise_generator = FastNoiseLite.new()
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	
+	astar.region = Rect2i(0, 0, map_width, map_height)
+	astar.cell_size = Vector2i(CELL_SIZE, CELL_SIZE)
+	astar.offset = Vector2i(CELL_SIZE/2, CELL_SIZE/2)
+	astar.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_ONLY_IF_NO_OBSTACLES
+	astar.default_compute_heuristic = AStarGrid2D.HEURISTIC_EUCLIDEAN
+	astar.update()
+	
+	fill_world()
+	add_spawn_area()
+
+	update_cell_terrain()
+	setup_durability_matrix()
+	
+	dwarf.position = get_world_map_center()*CELL_SIZE
+
+func setup_durability_matrix():
+	var matrix = []
+	for x in map_width:
+		matrix.append([])
+		for y in map_height:
+			matrix[x].append(get_cell_tile_data(MAIN_LAYER, Vector2i(x, y)).get_custom_data("Durability"))
+	tile_durability_matrix = matrix
+	
+func _input(event):
+	if (event is InputEventMouse):
+		if (event.is_pressed() and event.button_index == MOUSE_BUTTON_RIGHT):
+			var clicked_location = event.position
+			var camera_position : Vector2 = $PlayerController.position
+			var tile_location = local_to_map(clicked_location+camera_position);
+			# if(get_cell_atlas_coords(MAIN_LAYER, tile_location) == WALL_TEX_COORD):
+			# 	set_cell(MAIN_LAYER, tile_location, ATLAS, FLOOR_TEX_COORD)
+			var points = astar.get_point_path(local_to_map(dwarf.position), tile_location)
+			var new_points = []
+			# for point in points:
+			# 	new_points.append(point+Vector2(CELL_SIZE/2, CELL_SIZE/2))
+			line.points = points
+			print(astar.is_point_solid(tile_location))
+	
+
+func fill_world():
+	cave_noise_generator.seed = randi()
+	
+	for x in map_width:
+		for y in map_height:
+			astar.set_point_solid(Vector2i(x, y), false)
+			var noise = cave_noise_generator.get_noise_2d(x, y)
+			var tile_type = Vector2i.ZERO
+			if(noise > 0.3):
+				tile_type = FLOOR_TEX_COORD
+			else:
+				tile_type = WALL_TEX_COORD
+			set_cell(MAIN_LAYER, Vector2i(x, y), ATLAS, tile_type)
+			if(tile_type == WALL_TEX_COORD):
+				astar.set_point_solid(Vector2i(x, y), true)
+
+func add_spawn_area():
+	var spawn_tilemap = spawn_scene.instantiate()
+	var size : Vector2i = spawn_tilemap.get_used_rect().size
+	var start_pos = get_world_map_center() - size/2
+	for x in size.x:
+		for y in size.y:
+			var tile_data = spawn_tilemap.get_cell_tile_data(MAIN_LAYER, Vector2i(x, y))
+			var tile_type = spawn_tilemap.get_cell_atlas_coords(MAIN_LAYER, Vector2i(x, y))
+			if(tile_data):
+				set_cell(MAIN_LAYER, start_pos+Vector2i(x, y), ATLAS, tile_type)
+				
+				if(tile_type == WALL_TEX_COORD):
+					astar.set_point_solid(start_pos+Vector2i(x, y), true)
+				else:
+					astar.set_point_solid(start_pos+Vector2i(x, y), false)
+
+func update_cell_terrain():
+	var cells = get_used_cells(MAIN_LAYER);
+	for cell in cells:
+		var tile_type = get_cell_atlas_coords(MAIN_LAYER, cell)
+		if(tile_type != FLOOR_TEX_COORD):
+			set_cells_terrain_connect(MAIN_LAYER, [cell], 0, 0)
+
+func _process(delta):
+	if Input.is_action_just_pressed("reset"):
+		get_tree().reload_current_scene()
+
+func get_world_map_center():
+	return Vector2i(map_width/2, map_height/2)
+
+func get_move_path(position: Vector2, target: Vector2):
+	var type = get_cell_atlas_coords(MAIN_LAYER, local_to_map(target))
+	if(type == WALL_TEX_COORD):
+		var neighbors = get_surrounding_cells(local_to_map(target))
+		neighbors.sort_custom(func(a, b): return position.distance_to(map_to_local(a)) < position.distance_to(map_to_local(b)))
+		for cell in neighbors:
+			if(get_cell_atlas_coords(MAIN_LAYER, cell) != WALL_TEX_COORD):
+				return astar.get_point_path(local_to_map(position), cell)
+		return [];
+	else:
+		return astar.get_point_path(local_to_map(position), local_to_map(target))
+		
+
+func get_tile(target):
+	return get_cell_tile_data(MAIN_LAYER, local_to_map(target))
+	
+func dig_tile(target: Vector2, dig_damage):
+	var tile = local_to_map(target)
+	var durability_value = tile_durability_matrix[tile.x][tile.y]
+	tile_durability_matrix[tile.x][tile.y] -= dig_damage
+	if(durability_value <= 0):
+		destroy_tile(local_to_map(target))
+	return durability_value
+
+func destroy_tile(target_cell):
+	set_cell(MAIN_LAYER, target_cell, ATLAS, FLOOR_TEX_COORD)
+	astar.set_point_solid(target_cell, false)
+	var neighbors = get_surrounding_cells(target_cell)
+	set_cells_terrain_connect(MAIN_LAYER, neighbors, 0, 0)
+
+
+func setup_minimap():
+	var minimap = minimap_scene.instantiate()
+	$PlayerController/Camera2D.add_child(minimap)
