@@ -11,12 +11,14 @@ const WALL_TEX_COORD = Vector2i(1, 1)
 const FLOOR_TEX_COORD = Vector2i(1, 4)
 const CELL_SIZE = 20
 
-@onready var dwarf := $Dwarf
+@onready var selected_dwarf := $Dwarf
 @onready var player := $PlayerController
 @onready var line = $Line2D
+@onready var selection_poly = $Polygon2D
 @onready var astar = AStarGrid2D.new()
 @onready var minimap_scene := preload("res://scenes/minimap.tscn")
 @onready var spawn_scene := preload("res://scenes/spawn_cave.tscn")
+@onready var break_fx := preload("res://scenes/break_fx.tscn")
 
 var tile_durability_matrix;
 
@@ -42,30 +44,26 @@ func _ready():
 	update_cell_terrain()
 	setup_durability_matrix()
 	
-	dwarf.position = get_world_map_center()*CELL_SIZE
+	selected_dwarf.position = get_world_map_center()*CELL_SIZE
+	selected_dwarf.selected = true
 
 func setup_durability_matrix():
 	var matrix = []
 	for x in map_width:
 		matrix.append([])
 		for y in map_height:
-			matrix[x].append(get_cell_tile_data(MAIN_LAYER, Vector2i(x, y)).get_custom_data("Durability"))
+			var tile_data = get_cell_tile_data(MAIN_LAYER, Vector2i(x, y))
+			if(tile_data):
+				matrix[x].append(tile_data.get_custom_data("Durability"))
+			else:
+				matrix[x].append(0)
 	tile_durability_matrix = matrix
 	
 func _input(event):
 	if (event is InputEventMouse):
-		if (event.is_pressed() and event.button_index == MOUSE_BUTTON_RIGHT):
-			var clicked_location = event.position
-			var camera_position : Vector2 = $PlayerController.position
-			var tile_location = local_to_map(clicked_location+camera_position);
-			# if(get_cell_atlas_coords(MAIN_LAYER, tile_location) == WALL_TEX_COORD):
-			# 	set_cell(MAIN_LAYER, tile_location, ATLAS, FLOOR_TEX_COORD)
-			var points = astar.get_point_path(local_to_map(dwarf.position), tile_location)
-			var new_points = []
-			# for point in points:
-			# 	new_points.append(point+Vector2(CELL_SIZE/2, CELL_SIZE/2))
-			line.points = points
-			print(astar.is_point_solid(tile_location))
+		if (event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT):
+			var clicked_location = event.position + $PlayerController.position
+			
 	
 
 func fill_world():
@@ -134,6 +132,13 @@ func dig_tile(target: Vector2, dig_damage):
 	var tile = local_to_map(target)
 	var durability_value = tile_durability_matrix[tile.x][tile.y]
 	tile_durability_matrix[tile.x][tile.y] -= dig_damage
+	durability_value -= dig_damage
+
+	if(durability_value == 6):
+		var fx = break_fx.instantiate()
+		fx.position = map_to_local(tile)
+		add_child(fx)
+
 	if(durability_value <= 0):
 		destroy_tile(local_to_map(target))
 	return durability_value

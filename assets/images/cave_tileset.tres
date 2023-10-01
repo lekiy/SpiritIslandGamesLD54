@@ -22,6 +22,7 @@ use_texture_padding = false
 0:1/0/terrains_peering_bit/right_side = 0
 0:1/0/terrains_peering_bit/bottom_right_corner = 0
 0:1/0/terrains_peering_bit/top_right_corner = 0
+1:1/animation_columns = 1
 1:1/0 = 0
 1:1/0/terrain_set = 0
 1:1/0/terrain = 0

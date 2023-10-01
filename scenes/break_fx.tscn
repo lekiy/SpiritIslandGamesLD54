@@ -1,0 +1,38 @@
+[gd_scene load_steps=7 format=3 uid="uid://dtlxx1m677l3b"]
+
+[ext_resource type="Texture2D" uid="uid://dolrpat7s7qfp" path="res://assets/images/wall_crack_animation.png" id="1_11oyp"]
+[ext_resource type="Script" path="res://scripts/break_fx.gd" id="2_lwjey"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_672ry"]
+atlas = ExtResource("1_11oyp")
+region = Rect2(0, 0, 60, 60)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w1rro"]
+atlas = ExtResource("1_11oyp")
+region = Rect2(60, 0, 60, 60)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tgcdm"]
+atlas = ExtResource("1_11oyp")
+region = Rect2(120, 0, 60, 60)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_eqax7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_672ry")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w1rro")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tgcdm")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="BreakFX" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_eqax7")
+frame_progress = 0.045412
+script = ExtResource("2_lwjey")

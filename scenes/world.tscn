@@ -13,12 +13,20 @@ script = ExtResource("2_vo4iv")
 map_width = 26
 map_height = 26
 
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0, 0, 0, 1)
+
 [node name="PlayerController" parent="." instance=ExtResource("2_y7qcx")]
 
 [node name="Dwarf" parent="." instance=ExtResource("3_fub8i")]
 position = Vector2(-26, 8)
 
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color(1, 1, 1, 0)
+
 [node name="Line2D" type="Line2D" parent="."]
-width = 5.0
-default_color = Color(1, 1, 1, 0.360784)
+width = 2.0
+default_color = Color(1, 1, 1, 0.196078)
 joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
