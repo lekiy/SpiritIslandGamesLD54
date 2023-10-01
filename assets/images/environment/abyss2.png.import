@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://da8pawh4rhbpf"
-path="res://.godot/imported/char-2f-Sheet.png-b00d3c9ac4484986fc3f6e724c4c6848.ctex"
+uid="uid://b666l1rvlk3uf"
+path="res://.godot/imported/abyss2.png-dc0e47b5d4d2d7d1c51ca7d44ba444fc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/char-2f-Sheet.png"
-dest_files=["res://.godot/imported/char-2f-Sheet.png-b00d3c9ac4484986fc3f6e724c4c6848.ctex"]
+source_file="res://assets/images/environment/abyss2.png"
+dest_files=["res://.godot/imported/abyss2.png-dc0e47b5d4d2d7d1c51ca7d44ba444fc.ctex"]
 
 [params]
 

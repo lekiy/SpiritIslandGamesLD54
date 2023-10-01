@@ -1,32 +1,22 @@
-[gd_scene load_steps=5 format=3 uid="uid://lejtkiexy4a1"]
+[gd_scene load_steps=4 format=3 uid="uid://lejtkiexy4a1"]
 
-[ext_resource type="TileSet" uid="uid://da16geot1w31a" path="res://assets/images/cave_tileset.tres" id="1_4wutc"]
+[ext_resource type="TileSet" uid="uid://da16geot1w31a" path="res://assets/images/environment/cave_tileset.tres" id="1_8faki"]
 [ext_resource type="Script" path="res://scripts/world.gd" id="2_vo4iv"]
-[ext_resource type="PackedScene" uid="uid://ba57vgu422vlw" path="res://scenes/player_controller.tscn" id="2_y7qcx"]
-[ext_resource type="PackedScene" uid="uid://c80fvbsglni3n" path="res://scenes/dwarf.tscn" id="3_fub8i"]
+[ext_resource type="PackedScene" uid="uid://d1t1in4621rg8" path="res://scenes/game_camera.tscn" id="3_t07h3"]
 
 [node name="World" type="TileMap"]
-tile_set = ExtResource("1_4wutc")
+tile_set = ExtResource("1_8faki")
 cell_quadrant_size = 20
 format = 2
 script = ExtResource("2_vo4iv")
-map_width = 26
-map_height = 26
+map_width = 70
+map_height = 70
+
+[node name="GameCamera" parent="." instance=ExtResource("3_t07h3")]
+position_smoothing_enabled = true
+position_smoothing_speed = 15.0
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0, 0, 0, 1)
 
-[node name="PlayerController" parent="." instance=ExtResource("2_y7qcx")]
-
-[node name="Dwarf" parent="." instance=ExtResource("3_fub8i")]
-position = Vector2(-26, 8)
-
-[node name="Polygon2D" type="Polygon2D" parent="."]
-color = Color(1, 1, 1, 0)
-
-[node name="Line2D" type="Line2D" parent="."]
-width = 2.0
-default_color = Color(1, 1, 1, 0.196078)
-joint_mode = 2
-begin_cap_mode = 2
-end_cap_mode = 2
+[node name="PathingUI" type="Node" parent="."]

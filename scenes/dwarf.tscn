@@ -1,61 +1,61 @@
 [gd_scene load_steps=22 format=3 uid="uid://c80fvbsglni3n"]
 
 [ext_resource type="Script" path="res://scripts/dwarf.gd" id="1_tk2xj"]
-[ext_resource type="Texture2D" uid="uid://cf3khct6h0rfl" path="res://assets/images/char-2b-Sheet.png" id="2_yuhm4"]
+[ext_resource type="Texture2D" uid="uid://cf3khct6h0rfl" path="res://assets/images/character/char-2b-Sheet.png" id="2_jdg20"]
+[ext_resource type="Texture2D" uid="uid://da8pawh4rhbpf" path="res://assets/images/character/char-2f-Sheet.png" id="3_04lox"]
 [ext_resource type="Texture2D" uid="uid://mn4mw6wd55vf" path="res://assets/images/ui/selector.png" id="3_ed2gd"]
-[ext_resource type="Texture2D" uid="uid://da8pawh4rhbpf" path="res://assets/images/char-2f-Sheet.png" id="3_ooe5r"]
-[ext_resource type="Texture2D" uid="uid://bcgdp67pwp6ro" path="res://assets/images/char-2sl-Sheet.png" id="4_0hodk"]
+[ext_resource type="Texture2D" uid="uid://bcgdp67pwp6ro" path="res://assets/images/character/char-2sl-Sheet.png" id="4_kfcwy"]
 [ext_resource type="Texture2D" uid="uid://letck8re1hot" path="res://assets/images/light.png" id="6_6l45x"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_atarx"]
-size = Vector2(10, 16)
+size = Vector2(12, 12)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ilyq8"]
-atlas = ExtResource("2_yuhm4")
+atlas = ExtResource("2_jdg20")
 region = Rect2(0, 0, 20, 20)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_80oay"]
-atlas = ExtResource("3_ooe5r")
+atlas = ExtResource("3_04lox")
 region = Rect2(0, 0, 20, 20)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xsfl6"]
-atlas = ExtResource("4_0hodk")
+atlas = ExtResource("4_kfcwy")
 region = Rect2(0, 0, 20, 20)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qnf3o"]
-atlas = ExtResource("2_yuhm4")
+atlas = ExtResource("2_jdg20")
 region = Rect2(40, 0, 20, 20)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0efk3"]
-atlas = ExtResource("2_yuhm4")
+atlas = ExtResource("2_jdg20")
 region = Rect2(0, 0, 20, 20)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pkngu"]
-atlas = ExtResource("2_yuhm4")
+atlas = ExtResource("2_jdg20")
 region = Rect2(20, 0, 20, 20)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rign2"]
-atlas = ExtResource("3_ooe5r")
+atlas = ExtResource("3_04lox")
 region = Rect2(20, 0, 20, 20)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rqju4"]
-atlas = ExtResource("3_ooe5r")
+atlas = ExtResource("3_04lox")
 region = Rect2(0, 0, 20, 20)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_31q00"]
-atlas = ExtResource("3_ooe5r")
+atlas = ExtResource("3_04lox")
 region = Rect2(40, 0, 20, 20)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_h0adb"]
-atlas = ExtResource("4_0hodk")
+atlas = ExtResource("4_kfcwy")
 region = Rect2(20, 0, 20, 20)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_w6dev"]
-atlas = ExtResource("4_0hodk")
+atlas = ExtResource("4_kfcwy")
 region = Rect2(0, 0, 20, 20)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_s272k"]
-atlas = ExtResource("4_0hodk")
+atlas = ExtResource("4_kfcwy")
 region = Rect2(40, 0, 20, 20)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ppkm6"]
@@ -128,22 +128,25 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o0t12"]
+size = Vector2(16, 16)
 
 [node name="Dwarf" type="CharacterBody2D"]
 script = ExtResource("1_tk2xj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 4)
 shape = SubResource("RectangleShape2D_atarx")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_ppkm6")
 animation = &"walk_side"
-frame_progress = 0.567784
+frame_progress = 0.0413254
 
 [node name="ClickRegion" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ClickRegion"]
+position = Vector2(0, 2)
 shape = SubResource("RectangleShape2D_o0t12")
 
 [node name="Selector" type="Sprite2D" parent="."]
@@ -154,6 +157,9 @@ texture = ExtResource("3_ed2gd")
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
+scale = Vector2(0.1, 0.1)
+energy = 0.5
+blend_mode = 2
 texture = ExtResource("6_6l45x")
 
 [connection signal="mouse_entered" from="ClickRegion" to="." method="_on_click_region_mouse_entered"]

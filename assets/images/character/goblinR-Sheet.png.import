@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cw68db0tfw5h4"
-path="res://.godot/imported/abyss1.png-9fab3c07ad645dc5f1927dfe47e84f42.ctex"
+uid="uid://g0nlf15ylqh"
+path="res://.godot/imported/goblinR-Sheet.png-0db20a5b7f37f7e846f479be9e84df39.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/abyss1.png"
-dest_files=["res://.godot/imported/abyss1.png-9fab3c07ad645dc5f1927dfe47e84f42.ctex"]
+source_file="res://assets/images/character/goblinR-Sheet.png"
+dest_files=["res://.godot/imported/goblinR-Sheet.png-0db20a5b7f37f7e846f479be9e84df39.ctex"]
 
 [params]
 

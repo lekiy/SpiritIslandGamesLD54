@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cf3khct6h0rfl"
-path="res://.godot/imported/char-2b-Sheet.png-f0fb9c365a0b414230069951ad065aff.ctex"
+uid="uid://dc2pw2gveihag"
+path="res://.godot/imported/shack_closed.png-698801d37b7b83ff83e9af16c834096d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/char-2b-Sheet.png"
-dest_files=["res://.godot/imported/char-2b-Sheet.png-f0fb9c365a0b414230069951ad065aff.ctex"]
+source_file="res://assets/images/environment/shack_closed.png"
+dest_files=["res://.godot/imported/shack_closed.png-698801d37b7b83ff83e9af16c834096d.ctex"]
 
 [params]
 

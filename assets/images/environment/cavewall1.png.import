@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://sgwefk13oxci"
-path="res://.godot/imported/shack_open.png-762123f4c9e03cb5083b5e7aaf68ad84.ctex"
+uid="uid://y8rq1yut7huw"
+path="res://.godot/imported/cavewall1.png-da99bd4ccd18edbfd98d97630b8de36d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/shack_open.png"
-dest_files=["res://.godot/imported/shack_open.png-762123f4c9e03cb5083b5e7aaf68ad84.ctex"]
+source_file="res://assets/images/environment/cavewall1.png"
+dest_files=["res://.godot/imported/cavewall1.png-da99bd4ccd18edbfd98d97630b8de36d.ctex"]
 
 [params]
 

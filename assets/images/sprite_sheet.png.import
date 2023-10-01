@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://y8rq1yut7huw"
-path="res://.godot/imported/cavewall1.png-051027f85584b365fbd007bdfee37990.ctex"
+uid="uid://kusre8023awl"
+path="res://.godot/imported/sprite_sheet.png-2d6192a81112981bbd87431545f60776.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/cavewall1.png"
-dest_files=["res://.godot/imported/cavewall1.png-051027f85584b365fbd007bdfee37990.ctex"]
+source_file="res://assets/images/sprite_sheet.png"
+dest_files=["res://.godot/imported/sprite_sheet.png-2d6192a81112981bbd87431545f60776.ctex"]
 
 [params]
 

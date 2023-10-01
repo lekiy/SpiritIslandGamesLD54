@@ -1,18 +1,18 @@
 [gd_scene load_steps=7 format=3 uid="uid://dtlxx1m677l3b"]
 
-[ext_resource type="Texture2D" uid="uid://dolrpat7s7qfp" path="res://assets/images/wall_crack_animation.png" id="1_11oyp"]
+[ext_resource type="Texture2D" uid="uid://dolrpat7s7qfp" path="res://assets/images/environment/wall_crack_animation.png" id="1_te11y"]
 [ext_resource type="Script" path="res://scripts/break_fx.gd" id="2_lwjey"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_672ry"]
-atlas = ExtResource("1_11oyp")
+atlas = ExtResource("1_te11y")
 region = Rect2(0, 0, 60, 60)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_w1rro"]
-atlas = ExtResource("1_11oyp")
+atlas = ExtResource("1_te11y")
 region = Rect2(60, 0, 60, 60)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tgcdm"]
-atlas = ExtResource("1_11oyp")
+atlas = ExtResource("1_te11y")
 region = Rect2(120, 0, 60, 60)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_eqax7"]

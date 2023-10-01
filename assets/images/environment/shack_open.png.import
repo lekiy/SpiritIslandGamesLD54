@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b666l1rvlk3uf"
-path="res://.godot/imported/abyss2.png-5b57cce323d7cd02cfbbcfe8aef1eea5.ctex"
+uid="uid://sgwefk13oxci"
+path="res://.godot/imported/shack_open.png-d39cddabfd0f97666e02c54175012d4c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/abyss2.png"
-dest_files=["res://.godot/imported/abyss2.png-5b57cce323d7cd02cfbbcfe8aef1eea5.ctex"]
+source_file="res://assets/images/environment/shack_open.png"
+dest_files=["res://.godot/imported/shack_open.png-d39cddabfd0f97666e02c54175012d4c.ctex"]
 
 [params]
 

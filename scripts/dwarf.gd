@@ -1,14 +1,17 @@
-extends CharacterBody2D
+class_name Dwarf extends CharacterBody2D
 
 @export var selected := false
 @export var move_speed := 50
 @export var dig_strength := 2
 @export var dig_speed := 1
+@export var health := 6
 
 @onready var click_region : Area2D = $ClickRegion
 @onready var selector_sprite : Sprite2D = $Selector
 @onready var world : TileMap = get_parent()
 @onready var sprite = $AnimatedSprite2D
+@onready var path_line_scene := preload("res://scenes/path_line.tscn")
+@onready var wall_selection_scene := preload("res://scenes/wall_selection.tscn")
 
 const WALL_TEX_COORD = Vector2i(1, 1)
 const FLOOR_TEX_COORD = Vector2i(1, 4)
@@ -18,6 +21,7 @@ enum action {
 	ATTACK,
 	MOVE,
 	DIG,
+	DEATH
 }
 
 const directions = [Vector2.UP, Vector2.DOWN, Vector2.RIGHT, Vector2.LEFT]
@@ -31,18 +35,31 @@ var can_dig = true
 var dig_target
 var facing_direction = Vector2.DOWN
 
+var path_line: Line2D
+var wall_selection: Polygon2D
+
+func _ready():
+	path_line = path_line_scene.instantiate()
+	world.get_node("PathingUI").add_child(path_line)
+	path_line.visible = false
+	
+	wall_selection = wall_selection_scene.instantiate()
+	world.get_node("PathingUI").add_child(wall_selection)
+	wall_selection.visible = false
+
 func _input(event):
 	if(event is InputEventMouse):
 		if event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT:
 			if(mouse_over):
 				selected = true
-				selector_sprite.visible = true
+				
 			else:
 				selected = false;
-				selector_sprite.visible = false
+				
 			
 		if event.is_pressed() and event.button_index == MOUSE_BUTTON_RIGHT and selected:
-			var target_pos : Vector2 = get_parent().get_node("PlayerController").position + event.position
+			var camera = get_parent().get_node("GameCamera")
+			var target_pos : Vector2 = camera.position + event.position - Vector2(160, 90)
 			
 			var tile = world.get_tile(target_pos)
 			var tile_health = tile.get_custom_data("Durability")
@@ -55,7 +72,7 @@ func _input(event):
 		
 func set_move_path(target):
 	path = world.get_move_path(position, target)
-	world.line.points = path
+	path_line.points = path
 	if(path.size() > 0):
 		has_path = true
 		path_index = 0
@@ -78,8 +95,23 @@ func check_state():
 	print("dig_target", dig_target)
 	print("can_dig", can_dig)
 
+func update_selected():
+	if selected:
+		selector_sprite.visible = true
+		path_line.visible = true
+		wall_selection.visible = true
+		
+	else:
+		selector_sprite.visible = false
+		path_line.visible = false
+		wall_selection.visible = false
 
 func _physics_process(delta):
+	if(health <= 0):
+		queue_free()
+		action_state = action.DEATH
+
+	update_selected()
 
 	if(Input.is_action_just_pressed("check_state")):
 		check_state()
@@ -88,11 +120,14 @@ func _physics_process(delta):
 
 	if(selected and dig_target):
 		var origin = world.map_to_local(world.local_to_map(dig_target))-Vector2(world.CELL_SIZE/2, world.CELL_SIZE/2)
-		world.selection_poly.polygon = ([origin, Vector2(origin.x+world.CELL_SIZE, origin.y), Vector2(origin.x+world.CELL_SIZE, origin.y+world.CELL_SIZE), Vector2(origin.x, origin.y+world.CELL_SIZE)])
+		wall_selection.polygon = ([origin, Vector2(origin.x+world.CELL_SIZE, origin.y), Vector2(origin.x+world.CELL_SIZE, origin.y+world.CELL_SIZE), Vector2(origin.x, origin.y+world.CELL_SIZE)])
+		wall_selection.visible = true;
+		
 
 	match action_state:
 		action.IDLE:
 			velocity = Vector2.ZERO
+			wall_selection.visible = false;
 			set_anim_direction("idle")
 		action.MOVE:
 			if(has_path):
@@ -103,6 +138,7 @@ func _physics_process(delta):
 				
 			else:
 				sprite.rotation = 0
+				path_line.points = []
 				if(dig_target):
 					action_state = action.DIG
 				else:
@@ -111,20 +147,16 @@ func _physics_process(delta):
 			if(!dig_target):
 				action_state = action.IDLE
 			else:
-				
 				if(can_dig):
 					var remainder = world.dig_tile(dig_target, dig_strength)
-					print("remainder", remainder)
 					can_dig = false;
-					await get_tree().create_timer(dig_speed).timeout
-					can_dig = true
-					
 					if(remainder <= 0):
 						dig_target = null
 						action_state = action.IDLE
+					await get_tree().create_timer(dig_speed).timeout
+					can_dig = true
 					
-		
-
+					
 	move_and_slide()
 
 func follow_path():

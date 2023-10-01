@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=3 uid="uid://cbj7led5120g8"]
+
+[ext_resource type="Texture2D" uid="uid://kusre8023awl" path="res://assets/images/sprite_sheet.png" id="1_12bvn"]
+[ext_resource type="Texture2D" uid="uid://letck8re1hot" path="res://assets/images/light.png" id="2_u0aoe"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ta0j5"]
+atlas = ExtResource("1_12bvn")
+region = Rect2(0, 40, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_86cp6"]
+atlas = ExtResource("1_12bvn")
+region = Rect2(20, 40, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bu7j3"]
+atlas = ExtResource("1_12bvn")
+region = Rect2(40, 40, 20, 20)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3cghp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ta0j5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_86cp6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bu7j3")
+}],
+"loop": true,
+"name": &"default",
+"speed": 3.0
+}]
+
+[node name="Torch" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_3cghp")
+autoplay = "default"
+frame_progress = 0.728042
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+scale = Vector2(0.35, 0.35)
+color = Color(0.933333, 0.827451, 0.509804, 1)
+energy = 0.6
+blend_mode = 2
+texture = ExtResource("2_u0aoe")

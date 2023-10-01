@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://caihkaciu6xv0"
-path="res://.godot/imported/dwarf.png-2f37e2c687091adf9fda16d77163e8a8.ctex"
+uid="uid://da8pawh4rhbpf"
+path="res://.godot/imported/char-2f-Sheet.png-57c8fc9727a51e2034d281d0ed07f155.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/dwarf.png"
-dest_files=["res://.godot/imported/dwarf.png-2f37e2c687091adf9fda16d77163e8a8.ctex"]
+source_file="res://assets/images/character/char-2f-Sheet.png"
+dest_files=["res://.godot/imported/char-2f-Sheet.png-57c8fc9727a51e2034d281d0ed07f155.ctex"]
 
 [params]
 

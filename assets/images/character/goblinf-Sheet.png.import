@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dolrpat7s7qfp"
-path="res://.godot/imported/wall_crack_animation.png-306b0763d5157bfa9e469e18e2217679.ctex"
+uid="uid://blouewtfpw3w6"
+path="res://.godot/imported/goblinf-Sheet.png-d952e10adf45dc1ff9dd3f9920b76d2d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/wall_crack_animation.png"
-dest_files=["res://.godot/imported/wall_crack_animation.png-306b0763d5157bfa9e469e18e2217679.ctex"]
+source_file="res://assets/images/character/goblinf-Sheet.png"
+dest_files=["res://.godot/imported/goblinf-Sheet.png-d952e10adf45dc1ff9dd3f9920b76d2d.ctex"]
 
 [params]
 

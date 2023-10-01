@@ -1,0 +1,4 @@
+[gd_scene format=3 uid="uid://e0iqjpi06nem"]
+
+[node name="WallSelection" type="Polygon2D"]
+color = Color(1, 1, 1, 0.196078)

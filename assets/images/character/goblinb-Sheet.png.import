@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c4at2cv5weenw"
-path="res://.godot/imported/test_tile.png-c826d7b282ec86cd4bf378e9282f899d.ctex"
+uid="uid://bta40y14hhg7y"
+path="res://.godot/imported/goblinb-Sheet.png-e259c981813e9c3659d50a49595aa31d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/test_tile.png"
-dest_files=["res://.godot/imported/test_tile.png-c826d7b282ec86cd4bf378e9282f899d.ctex"]
+source_file="res://assets/images/character/goblinb-Sheet.png"
+dest_files=["res://.godot/imported/goblinb-Sheet.png-e259c981813e9c3659d50a49595aa31d.ctex"]
 
 [params]
 

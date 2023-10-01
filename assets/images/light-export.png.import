@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d4kyoxqayd5vh"
-path="res://.godot/imported/cavewall2.png-65904ccac5148b1d242885798c8736d4.ctex"
+uid="uid://bsa2mfyiei7qs"
+path="res://.godot/imported/light-export.png-a9c520b1137b524d82ad1f49872ef74b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/cavewall2.png"
-dest_files=["res://.godot/imported/cavewall2.png-65904ccac5148b1d242885798c8736d4.ctex"]
+source_file="res://assets/images/light-export.png"
+dest_files=["res://.godot/imported/light-export.png-a9c520b1137b524d82ad1f49872ef74b.ctex"]
 
 [params]
 

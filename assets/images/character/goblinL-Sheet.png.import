@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bcgdp67pwp6ro"
-path="res://.godot/imported/char-2sl-Sheet.png-66b4a00c8bf1240ff5e6d2a21fe3a96e.ctex"
+uid="uid://b6oq5ag4ap20t"
+path="res://.godot/imported/goblinL-Sheet.png-f65e6034f4f258451873d6206c12e857.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/char-2sl-Sheet.png"
-dest_files=["res://.godot/imported/char-2sl-Sheet.png-66b4a00c8bf1240ff5e6d2a21fe3a96e.ctex"]
+source_file="res://assets/images/character/goblinL-Sheet.png"
+dest_files=["res://.godot/imported/goblinL-Sheet.png-f65e6034f4f258451873d6206c12e857.ctex"]
 
 [params]
 

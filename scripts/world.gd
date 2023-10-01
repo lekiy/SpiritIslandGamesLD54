@@ -11,16 +11,22 @@ const WALL_TEX_COORD = Vector2i(1, 1)
 const FLOOR_TEX_COORD = Vector2i(1, 4)
 const CELL_SIZE = 20
 
-@onready var selected_dwarf := $Dwarf
-@onready var player := $PlayerController
-@onready var line = $Line2D
-@onready var selection_poly = $Polygon2D
+@onready var camera := $GameCamera
+# @onready var line = $Line2D
+# @onready var selection_poly = $Polygon2D
+@onready var pathing_ui = $PathingUI
 @onready var astar = AStarGrid2D.new()
 @onready var minimap_scene := preload("res://scenes/minimap.tscn")
 @onready var spawn_scene := preload("res://scenes/spawn_cave.tscn")
 @onready var break_fx := preload("res://scenes/break_fx.tscn")
 
-var tile_durability_matrix;
+@onready var dwarf_scene := preload("res://scenes/dwarf.tscn")
+@onready var goblin_scene := preload("res://scenes/goblin.tscn")
+
+@onready var torch_scene := preload("res://scenes/torch.tscn")
+
+var tile_durability_matrix
+var mouse_position
 
 const dirs = [Vector2.UP, Vector2.DOWN, Vector2.LEFT, Vector2.RIGHT]
 
@@ -40,12 +46,14 @@ func _ready():
 	
 	fill_world()
 	add_spawn_area()
+	spawn_dwarf()
 
 	update_cell_terrain()
 	setup_durability_matrix()
-	
-	selected_dwarf.position = get_world_map_center()*CELL_SIZE
-	selected_dwarf.selected = true
+
+func _input(event):
+	if(event is InputEventMouse):
+		mouse_position = event.position
 
 func setup_durability_matrix():
 	var matrix = []
@@ -58,12 +66,6 @@ func setup_durability_matrix():
 			else:
 				matrix[x].append(0)
 	tile_durability_matrix = matrix
-	
-func _input(event):
-	if (event is InputEventMouse):
-		if (event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT):
-			var clicked_location = event.position + $PlayerController.position
-			
 	
 
 func fill_world():
@@ -106,8 +108,41 @@ func update_cell_terrain():
 			set_cells_terrain_connect(MAIN_LAYER, [cell], 0, 0)
 
 func _process(delta):
+	if(Input.is_action_just_pressed("spawn_dwarf")):
+		spawn_dwarf()
+
+	if(Input.is_action_just_pressed("spawn_enemy")):
+		spawn_enemy(goblin_scene, get_world_mouse_position())
+	if(Input.is_action_just_pressed("spawn_light")):
+		spawn_object(torch_scene, get_world_mouse_position())
+
+		
+
 	if Input.is_action_just_pressed("reset"):
 		get_tree().reload_current_scene()
+
+func get_world_mouse_position():
+	return mouse_position+camera.position- Vector2(160, 90)
+	
+func spawn_dwarf():
+	var new_dwarf = dwarf_scene.instantiate()
+	add_child(new_dwarf)
+
+	new_dwarf.position = get_world_map_center()*CELL_SIZE
+	camera.position = new_dwarf.position
+
+func spawn_enemy(enemy_scene, spawn_position):
+	var enemy = enemy_scene.instantiate()
+	add_child(enemy)
+
+	enemy.position = spawn_position
+
+func spawn_object(object_scene, spawn_position):
+	var object = object_scene.instantiate()
+	add_child(object)
+
+	object.position = spawn_position
+
 
 func get_world_map_center():
 	return Vector2i(map_width/2, map_height/2)
@@ -150,6 +185,6 @@ func destroy_tile(target_cell):
 	set_cells_terrain_connect(MAIN_LAYER, neighbors, 0, 0)
 
 
-func setup_minimap():
-	var minimap = minimap_scene.instantiate()
-	$PlayerController/Camera2D.add_child(minimap)
+# func setup_minimap():
+# 	var minimap = minimap_scene.instantiate()
+# 	$PlayerController/Camera2D.add_child(minimap)
