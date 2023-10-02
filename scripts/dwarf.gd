@@ -162,7 +162,10 @@ func _physics_process(delta):
 func follow_path():
 	var target_point = path[path_index]
 	var dir = position.direction_to(target_point)
-	if(position.distance_to(target_point) < 3):
+	var forgiveness = world.CELL_SIZE/2
+	if(path_index == path.size()-1):
+		forgiveness = 2
+	if(position.distance_to(target_point) < forgiveness):
 		path_index+=1;
 		if(path_index >= path.size()):
 			has_path = false;

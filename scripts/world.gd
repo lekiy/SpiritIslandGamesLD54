@@ -184,7 +184,3 @@ func destroy_tile(target_cell):
 	var neighbors = get_surrounding_cells(target_cell)
 	set_cells_terrain_connect(MAIN_LAYER, neighbors, 0, 0)
 
-
-# func setup_minimap():
-# 	var minimap = minimap_scene.instantiate()
-# 	$PlayerController/Camera2D.add_child(minimap)

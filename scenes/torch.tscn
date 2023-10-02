@@ -35,7 +35,7 @@ animations = [{
 [node name="Torch" type="AnimatedSprite2D"]
 sprite_frames = SubResource("SpriteFrames_3cghp")
 autoplay = "default"
-frame_progress = 0.728042
+frame_progress = 0.686314
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 scale = Vector2(0.35, 0.35)
