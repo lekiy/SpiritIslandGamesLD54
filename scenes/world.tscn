@@ -17,6 +17,7 @@ position_smoothing_enabled = true
 position_smoothing_speed = 15.0
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
+visible = false
 color = Color(0, 0, 0, 1)
 
 [node name="PathingUI" type="Node" parent="."]

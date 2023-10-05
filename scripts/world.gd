@@ -7,7 +7,7 @@ extends TileMap
 const MAIN_LAYER = 0
 const ATLAS = 0
 
-const WALL_TEX_COORD = Vector2i(1, 1)
+const WALL_TEX_COORD = Vector2i(0, 2)
 const FLOOR_TEX_COORD = Vector2i(1, 4)
 const CELL_SIZE = 20
 
@@ -104,7 +104,7 @@ func update_cell_terrain():
 	var cells = get_used_cells(MAIN_LAYER);
 	for cell in cells:
 		var tile_type = get_cell_atlas_coords(MAIN_LAYER, cell)
-		if(tile_type != FLOOR_TEX_COORD):
+		if(tile_type == FLOOR_TEX_COORD):
 			set_cells_terrain_connect(MAIN_LAYER, [cell], 0, 0)
 
 func _process(delta):
@@ -179,8 +179,6 @@ func dig_tile(target: Vector2, dig_damage):
 	return durability_value
 
 func destroy_tile(target_cell):
-	set_cell(MAIN_LAYER, target_cell, ATLAS, FLOOR_TEX_COORD)
+	set_cells_terrain_connect(MAIN_LAYER, [target_cell], 0, 0)
 	astar.set_point_solid(target_cell, false)
-	var neighbors = get_surrounding_cells(target_cell)
-	set_cells_terrain_connect(MAIN_LAYER, neighbors, 0, 0)
 
