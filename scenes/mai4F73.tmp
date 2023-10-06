@@ -8,9 +8,7 @@
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="UI" parent="CanvasLayer" instance=ExtResource("1_dxkae")]
-anchor_right = 1.0
-anchor_bottom = 0.994
-offset_right = 1.0
-offset_bottom = 0.0800018
+offset_top = -0.0400047
+offset_bottom = -0.120018
 
 [node name="World" parent="." instance=ExtResource("1_q0m7d")]

@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://d6g8bww3cpgq"]
+
+[ext_resource type="Script" path="res://scripts/UI/DwarfDisplay.gd" id="1_bef1l"]
+[ext_resource type="Texture2D" uid="uid://caihkaciu6xv0" path="res://assets/images/character/dwarf.png" id="2_2qwkr"]
+[ext_resource type="FontFile" uid="uid://bflpiipk11a0p" path="res://assets/Kenney Mini Square.ttf" id="3_b32fe"]
+[ext_resource type="Script" path="res://scripts/UI/GuiHealthBar.gd" id="4_fmlc1"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_birft"]
+line_spacing = 0.0
+font = ExtResource("3_b32fe")
+font_size = 8
+shadow_color = Color(0, 0, 0, 1)
+
+[node name="DwarfDisplay" type="VBoxContainer"]
+offset_right = 81.0
+offset_bottom = 16.0
+script = ExtResource("1_bef1l")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_2qwkr")
+stretch_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+text = "Dwarf Name"
+label_settings = SubResource("LabelSettings_birft")
+
+[node name="GuiHealthBar" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 1
+script = ExtResource("4_fmlc1")

@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://b7nxteqm0lwwk"]
+
+[ext_resource type="PackedScene" uid="uid://dswn0438cvsqw" path="res://scenes/ui/team_display.tscn" id="1_7w2bd"]
+[ext_resource type="Script" path="res://scripts/UI/TeamDisplay.gd" id="2_exvtc"]
+
+[node name="UI" type="Control"]
+layout_mode = 3
+anchor_right = 0.509
+anchor_bottom = 0.556
+offset_right = 0.119995
+offset_bottom = -0.0800095
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TeamDisplay" parent="." instance=ExtResource("1_7w2bd")]
+layout_mode = 0
+script = ExtResource("2_exvtc")

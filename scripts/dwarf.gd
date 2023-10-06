@@ -4,7 +4,9 @@ class_name Dwarf extends CharacterBody2D
 @export var move_speed := 50
 @export var dig_strength := 2
 @export var dig_speed := 1
-@export var health := 6
+@export var max_health = 6
+var health
+
 
 @onready var click_region : Area2D = $ClickRegion
 @onready var selector_sprite : Sprite2D = $Selector
@@ -13,8 +15,12 @@ class_name Dwarf extends CharacterBody2D
 @onready var path_line_scene := preload("res://scenes/path_line.tscn")
 @onready var wall_selection_scene := preload("res://scenes/wall_selection.tscn")
 
+
 const WALL_TEX_COORD = Vector2i(1, 1)
 const FLOOR_TEX_COORD = Vector2i(1, 4)
+
+var inventory = []
+@export var carry_weight = 5
 
 enum action {
 	IDLE,
@@ -25,6 +31,7 @@ enum action {
 }
 
 const directions = [Vector2.UP, Vector2.DOWN, Vector2.RIGHT, Vector2.LEFT]
+var display_name
 var path = []
 var has_path = false
 var path_index = 0
@@ -46,6 +53,10 @@ func _ready():
 	wall_selection = wall_selection_scene.instantiate()
 	world.get_node("PathingUI").add_child(wall_selection)
 	wall_selection.visible = false
+
+	health = max_health
+
+	display_name = get_dwarf_name()
 
 func _input(event):
 	if(event is InputEventMouse):
@@ -79,6 +90,22 @@ func set_move_path(target):
 	else:
 		has_path = false;
 		velocity = Vector2.ZERO
+
+func get_dwarf_name():
+	var names = [
+		"Reginald",
+		"Karl",
+		"Gondred",
+		"Mifrend",
+		"Hisfrend",
+		"Dranle",
+		"Grizzly",
+		"Todard",
+		"Pagruph"
+	]
+
+	names.shuffle()
+	return names[0]
 
 func set_facing_direction():
 	
@@ -191,3 +218,4 @@ func _on_click_region_mouse_exited():
 
 func _on_click_region_mouse_entered():
 	mouse_over = true
+

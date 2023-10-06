@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://ba57vgu422vlw"]
+[gd_scene load_steps=4 format=3 uid="uid://ba57vgu422vlw"]
 
 [ext_resource type="Script" path="res://scripts/PlayerController.gd" id="1_5whgh"]
 [ext_resource type="PackedScene" uid="uid://d1t1in4621rg8" path="res://scenes/game_camera.tscn" id="2_hr8e3"]
+[ext_resource type="PackedScene" uid="uid://b7nxteqm0lwwk" path="res://scenes/ui.tscn" id="3_m16k2"]
 
 [node name="PlayerController" type="Node2D"]
 position = Vector2(-1, 0)
@@ -9,3 +10,9 @@ script = ExtResource("1_5whgh")
 scroll_speed = 300
 
 [node name="GameCamera" parent="." instance=ExtResource("2_hr8e3")]
+
+[node name="UI" parent="GameCamera" instance=ExtResource("3_m16k2")]
+offset_left = -160.0
+offset_top = -89.04
+offset_right = -159.88
+offset_bottom = -89.04

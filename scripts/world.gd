@@ -1,4 +1,4 @@
-extends TileMap
+class_name World extends TileMap
 
 @export var map_width = 500
 @export var map_height = 500
@@ -24,6 +24,12 @@ const CELL_SIZE = 20
 @onready var goblin_scene := preload("res://scenes/goblin.tscn")
 
 @onready var torch_scene := preload("res://scenes/torch.tscn")
+@onready var rock_scene := preload("res://scenes/pickup_rock.tscn")
+
+var dwarves = []
+var max_dwarves = 2
+
+signal dwarf_count_changed(dwarves)
 
 var tile_durability_matrix
 var mouse_position
@@ -125,11 +131,13 @@ func get_world_mouse_position():
 	return mouse_position+camera.position- Vector2(160, 90)
 	
 func spawn_dwarf():
-	var new_dwarf = dwarf_scene.instantiate()
-	add_child(new_dwarf)
-
-	new_dwarf.position = get_world_map_center()*CELL_SIZE
-	camera.position = new_dwarf.position
+	if(dwarves.size() < max_dwarves):
+		var new_dwarf = dwarf_scene.instantiate()
+		add_child(new_dwarf)
+		dwarves.append(new_dwarf)
+		emit_signal("dwarf_count_changed", dwarves)
+		new_dwarf.position = get_world_map_center()*CELL_SIZE
+		camera.position = new_dwarf.position
 
 func spawn_enemy(enemy_scene, spawn_position):
 	var enemy = enemy_scene.instantiate()
@@ -179,6 +187,17 @@ func dig_tile(target: Vector2, dig_damage):
 	return durability_value
 
 func destroy_tile(target_cell):
+	var tile_type = get_cell_atlas_coords(MAIN_LAYER, target_cell)
 	set_cells_terrain_connect(MAIN_LAYER, [target_cell], 0, 0)
 	astar.set_point_solid(target_cell, false)
+	spawn_resources(target_cell, tile_type)
+
+func spawn_resources(tile_position, tile_type):
+	match tile_type:
+		WALL_TEX_COORD:
+			for i in randi_range(1, 2):
+				var rock = rock_scene.instantiate()
+				add_child(rock)
+				rock.position = map_to_local(tile_position)+Vector2(randf_range(-CELL_SIZE/4, CELL_SIZE/4), randf_range(-CELL_SIZE/4, CELL_SIZE/4))
+
 
