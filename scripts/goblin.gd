@@ -30,7 +30,6 @@ var attack_target: Node2D
 var can_attack = true
 
 func _physics_process(delta):
-
 	match action_state:
 		action.IDLE:
 			if(attack_target):
@@ -40,6 +39,8 @@ func _physics_process(delta):
 			set_anim_direction("idle")
 			
 		action.MOVE:
+			if(attack_target and position.distance_to(attack_target.position) < attack_range):
+				action_state = action.ATTACK
 			if(has_path):
 				velocity = follow_path()*move_speed
 				# sprite.rotation = deg_to_rad(pingpong(lifetime*2, 10)-5)
@@ -48,9 +49,9 @@ func _physics_process(delta):
 			else:
 				action_state = action.IDLE
 		action.ATTACK:
-			if(!attack_target):
+			if(!attack_target or !can_attack):
 				action_state = action.IDLE
-			elif(position.distance_to(attack_target.position) >= attack_range):
+			elif(position.distance_to(attack_target.position) > attack_range):
 				action_state = action.MOVE
 				set_move_path(attack_target.position)
 			else:
