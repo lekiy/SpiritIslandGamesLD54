@@ -2,7 +2,7 @@ class_name TeamDisplay extends GridContainer
 
 @export var dwarf_display_template : PackedScene = preload("res://scenes/ui/dwarf_display.tscn")
 
-@onready var display_container : MarginContainer = $DisplayContainer
+@onready var display_container : VBoxContainer = $DisplayContainer/VBoxContainer
 
 var displays : Array[DwarfDisplay]
 
@@ -19,6 +19,6 @@ func _on_dwarf_count_changed():
 	for dwarf in dwarves:
 		var display = dwarf_display_template.instantiate()
 		new_displays.append(display)
-		add_child(display)
+		display_container.add_child(display)
 		display.update_data(dwarf)
 	displays = new_displays

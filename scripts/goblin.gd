@@ -4,7 +4,7 @@ extends CharacterBody2D
 @export var target_radius = 100
 @export var health = 10
 @export var attack_rate = 1
-@export var attack_damage = 10
+@export var attack_damage = 1
 @export var attack_range = 20
 
 @onready var world : TileMap = get_parent()

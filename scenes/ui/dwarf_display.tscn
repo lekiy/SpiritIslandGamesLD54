@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/UI/DwarfDisplay.gd" id="1_bef1l"]
 [ext_resource type="Texture2D" uid="uid://caihkaciu6xv0" path="res://assets/images/character/dwarf.png" id="2_2qwkr"]
 [ext_resource type="FontFile" uid="uid://bflpiipk11a0p" path="res://assets/Kenney Mini Square.ttf" id="3_b32fe"]
-[ext_resource type="Script" path="res://scripts/UI/GuiHealthBar.gd" id="4_fmlc1"]
+[ext_resource type="PackedScene" uid="uid://c8wnkiq0jtgxj" path="res://scenes/ui/gui_health_bar.tscn" id="4_vdvjp"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_birft"]
 line_spacing = 0.0
@@ -29,7 +29,5 @@ layout_mode = 2
 text = "Dwarf Name"
 label_settings = SubResource("LabelSettings_birft")
 
-[node name="GuiHealthBar" type="HBoxContainer" parent="."]
+[node name="GuiHealthBar" parent="." instance=ExtResource("4_vdvjp")]
 layout_mode = 2
-theme_override_constants/separation = 1
-script = ExtResource("4_fmlc1")

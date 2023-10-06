@@ -10,3 +10,6 @@ func update_data(dwarf_instance):
 	dwarf = dwarf_instance
 	label.text = dwarf.display_name
 	healthbar.set_max_hearts(dwarf.max_health)
+
+func _process(delta):
+	healthbar.update_hearts(dwarf.health)

@@ -220,6 +220,5 @@ func _on_click_region_mouse_exited():
 func _on_click_region_mouse_entered():
 	mouse_over = true
 
-
 func _on_tree_exited():
 	world.remove_dwarf()
