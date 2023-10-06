@@ -26,10 +26,10 @@ const CELL_SIZE = 20
 @onready var torch_scene := preload("res://scenes/torch.tscn")
 @onready var rock_scene := preload("res://scenes/pickup_rock.tscn")
 
-var dwarves = []
 var max_dwarves = 2
+var dwarves_count = 0
 
-signal dwarf_count_changed(dwarves)
+signal dwarf_count_changed()
 
 var tile_durability_matrix
 var mouse_position
@@ -127,17 +127,24 @@ func _process(delta):
 	if Input.is_action_just_pressed("reset"):
 		get_tree().reload_current_scene()
 
+	
+
+
 func get_world_mouse_position():
 	return mouse_position+camera.position- Vector2(160, 90)
 	
 func spawn_dwarf():
-	if(dwarves.size() < max_dwarves):
+	if(dwarves_count < max_dwarves):
 		var new_dwarf = dwarf_scene.instantiate()
 		add_child(new_dwarf)
-		dwarves.append(new_dwarf)
-		emit_signal("dwarf_count_changed", dwarves)
+		dwarves_count+=1
+		emit_signal("dwarf_count_changed")
 		new_dwarf.position = get_world_map_center()*CELL_SIZE
 		camera.position = new_dwarf.position
+
+func remove_dwarf():
+	dwarves_count -= 1
+	emit_signal("dwarf_count_changed")
 
 func spawn_enemy(enemy_scene, spawn_position):
 	var enemy = enemy_scene.instantiate()

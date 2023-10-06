@@ -11,7 +11,8 @@ func _ready():
 	world.connect("dwarf_count_changed", _on_dwarf_count_changed)
 
 
-func _on_dwarf_count_changed(dwarves):
+func _on_dwarf_count_changed():
+	var dwarves = get_tree().get_nodes_in_group("Dwarf")
 	var new_displays : Array[DwarfDisplay] = []
 	for display in displays:
 		display.queue_free()

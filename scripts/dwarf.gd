@@ -135,8 +135,9 @@ func update_selected():
 
 func _physics_process(delta):
 	if(health <= 0):
-		queue_free()
+
 		action_state = action.DEATH
+		queue_free() #will need to pull out later till end of death step
 
 	update_selected()
 
@@ -219,3 +220,6 @@ func _on_click_region_mouse_exited():
 func _on_click_region_mouse_entered():
 	mouse_over = true
 
+
+func _on_tree_exited():
+	world.remove_dwarf()
