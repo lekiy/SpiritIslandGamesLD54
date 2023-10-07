@@ -1,9 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://d6g8bww3cpgq"]
+[gd_scene load_steps=7 format=3 uid="uid://d6g8bww3cpgq"]
 
-[ext_resource type="Script" path="res://scripts/UI/DwarfDisplay.gd" id="1_bef1l"]
-[ext_resource type="Texture2D" uid="uid://caihkaciu6xv0" path="res://assets/images/character/dwarf.png" id="2_2qwkr"]
+[ext_resource type="Script" path="res://scripts/DwarfDisplay.gd" id="1_bmq8m"]
+[ext_resource type="Texture2D" uid="uid://da8pawh4rhbpf" path="res://assets/images/character/char-2f-Sheet.png" id="2_tq0tc"]
 [ext_resource type="FontFile" uid="uid://bflpiipk11a0p" path="res://assets/Kenney Mini Square.ttf" id="3_b32fe"]
 [ext_resource type="PackedScene" uid="uid://c8wnkiq0jtgxj" path="res://scenes/ui/gui_health_bar.tscn" id="4_vdvjp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_68o7d"]
+atlas = ExtResource("2_tq0tc")
+region = Rect2(3, 2, 14, 16)
 
 [sub_resource type="LabelSettings" id="LabelSettings_birft"]
 line_spacing = 0.0
@@ -14,14 +18,14 @@ shadow_color = Color(0, 0, 0, 1)
 [node name="DwarfDisplay" type="VBoxContainer"]
 offset_right = 81.0
 offset_bottom = 16.0
-script = ExtResource("1_bef1l")
+script = ExtResource("1_bmq8m")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="HBoxContainer"]
 layout_mode = 2
-texture = ExtResource("2_2qwkr")
+texture = SubResource("AtlasTexture_68o7d")
 stretch_mode = 2
 
 [node name="Label" type="Label" parent="HBoxContainer"]

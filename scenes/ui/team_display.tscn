@@ -1,11 +1,11 @@
 [gd_scene load_steps=2 format=3 uid="uid://dswn0438cvsqw"]
 
-[ext_resource type="Script" path="res://scripts/UI/TeamDisplay.gd" id="1_1ulko"]
+[ext_resource type="Script" path="res://scripts/TeamDisplay.gd" id="1_njvxp"]
 
 [node name="TeamDisplay" type="GridContainer" groups=["TeamDisplay"]]
 offset_right = 40.0
 offset_bottom = 40.0
-script = ExtResource("1_1ulko")
+script = ExtResource("1_njvxp")
 
 [node name="DisplayContainer" type="MarginContainer" parent="."]
 layout_mode = 2
