@@ -29,7 +29,7 @@ var lifetime = 0;
 var attack_target: Node2D
 var can_attack = true
 
-func _physics_process(delta):
+func _process(delta):
 	match action_state:
 		action.IDLE:
 			if(attack_target):
@@ -59,7 +59,7 @@ func _physics_process(delta):
 				attack(attack_target)
 
 
-					
+func _physics_process(delta):				
 	move_and_slide()
 
 
