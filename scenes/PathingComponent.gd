@@ -21,16 +21,12 @@ func move_to_tile(target_tile_pos):
 		#may need to force stop movement here
 
 
-func follow_actor(actor: CharacterBody2D):
-	pass
-
-
 func get_direction_to_path() -> Vector2 :
 	if(path_index >= path.size()):
 		has_path = false;
 		path_index = 0;
 		return Vector2.ZERO
-		
+
 	var dir = parent.position.direction_to(path[path_index])
 	if(path.size() > 0 and parent.position.distance_to(path[path_index]) <= 1):
 		path_index+=1;
@@ -39,3 +35,8 @@ func get_direction_to_path() -> Vector2 :
 
 func setup_line(path: Array[Vector2]):
 	pass
+
+func clear_path():
+	path = []
+	path_index = 0
+	has_path = false

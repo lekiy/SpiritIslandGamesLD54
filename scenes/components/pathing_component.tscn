@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b08sx1tqt8nq1"]
+
+[ext_resource type="Script" path="res://scenes/PathingComponent.gd" id="1_mkggu"]
+
+[node name="PathingComponent" type="Node"]
+script = ExtResource("1_mkggu")

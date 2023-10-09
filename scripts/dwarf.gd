@@ -32,9 +32,6 @@ enum action {
 
 const directions = [Vector2.UP, Vector2.DOWN, Vector2.RIGHT, Vector2.LEFT]
 var display_name
-# var path = []
-# var has_path = false
-# var path_index = 0
 var lifetime = 0;
 var mouse_over = false;
 var action_state = action.IDLE
@@ -79,17 +76,6 @@ func _input(event):
 				
 			action_state = action.MOVE
 			pathing.move_to_tile(target_pos)
-				
-		
-# func set_move_path(target):
-# 	path = world.get_move_path(position, target)
-# 	path_line.points = path
-# 	if(path.size() > 0):
-# 		has_path = true
-# 		path_index = 0
-# 	else:
-# 		has_path = false;
-# 		velocity = Vector2.ZERO
 
 func get_dwarf_name():
 	var names = [
@@ -180,20 +166,6 @@ func _physics_process(_delta):
 					
 					
 	move_and_slide()
-
-# func follow_path():
-# 	var target_point = path[path_index]
-# 	var dir = position.direction_to(target_point)
-# 	var forgiveness = world.CELL_SIZE/2
-# 	if(path_index == path.size()-1):
-# 		forgiveness = 2
-# 	if(position.distance_to(target_point) < forgiveness):
-# 		path_index+=1;
-# 		if(path_index >= path.size()):
-# 			has_path = false;
-# 			path_index = 0;
-# 			dir = Vector2.ZERO
-# 	return dir;
 
 func set_anim_direction(animation_sub_name: String):
 	match facing_direction:

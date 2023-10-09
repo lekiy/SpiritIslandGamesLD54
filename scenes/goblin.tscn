@@ -1,10 +1,11 @@
-[gd_scene load_steps=26 format=3 uid="uid://hmw6evgpjwrw"]
+[gd_scene load_steps=27 format=3 uid="uid://hmw6evgpjwrw"]
 
 [ext_resource type="Script" path="res://scripts/goblin.gd" id="1_0ot34"]
 [ext_resource type="Texture2D" uid="uid://bta40y14hhg7y" path="res://assets/images/character/goblinb-Sheet.png" id="1_j3lhk"]
 [ext_resource type="Texture2D" uid="uid://blouewtfpw3w6" path="res://assets/images/character/goblinf-Sheet.png" id="2_eyjgm"]
 [ext_resource type="Texture2D" uid="uid://b6oq5ag4ap20t" path="res://assets/images/character/goblinL-Sheet.png" id="3_n8apc"]
 [ext_resource type="Texture2D" uid="uid://g0nlf15ylqh" path="res://assets/images/character/goblinR-Sheet.png" id="4_1yhmc"]
+[ext_resource type="PackedScene" uid="uid://b08sx1tqt8nq1" path="res://scenes/components/pathing_component.tscn" id="6_yn3e0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gbgmo"]
 atlas = ExtResource("1_j3lhk")
@@ -203,6 +204,8 @@ shape = SubResource("RectangleShape2D_fec7n")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AggroRegion"]
 shape = SubResource("CircleShape2D_v4y1p")
+
+[node name="PathingComponent" parent="." instance=ExtResource("6_yn3e0")]
 
 [connection signal="body_entered" from="AggroRegion" to="." method="_on_aggro_region_body_entered"]
 [connection signal="body_exited" from="AggroRegion" to="." method="_on_aggro_region_body_exited"]

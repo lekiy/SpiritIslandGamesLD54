@@ -10,6 +10,8 @@ extends CharacterBody2D
 @onready var world : TileMap = get_parent()
 @onready var sprite = $AnimatedSprite2D
 @onready var aggro_region : Area2D = $AggroRegion
+@onready var pathing : PathingComponent = $PathingComponent
+
 
 enum action {
 	IDLE,
@@ -22,14 +24,11 @@ var action_state = action.IDLE
 const directions = [Vector2.UP, Vector2.DOWN, Vector2.RIGHT, Vector2.LEFT]
 var facing_direction = Vector2.DOWN
 
-var path = []
-var has_path = false
-var path_index = 0
 var lifetime = 0;
 var attack_target: Node2D
 var can_attack = true
 
-func _process(delta):
+func _process(_delta):
 	match action_state:
 		action.IDLE:
 			if(attack_target):
@@ -41,8 +40,8 @@ func _process(delta):
 		action.MOVE:
 			if(attack_target and position.distance_to(attack_target.position) < attack_range):
 				action_state = action.ATTACK
-			if(has_path):
-				velocity = follow_path()*move_speed
+			if(pathing.has_path):
+				velocity = pathing.get_direction_to_path()*move_speed
 				# sprite.rotation = deg_to_rad(pingpong(lifetime*2, 10)-5)
 				set_facing_direction()
 				set_anim_direction("walk")
@@ -53,13 +52,13 @@ func _process(delta):
 				action_state = action.IDLE
 			elif(position.distance_to(attack_target.position) > attack_range):
 				action_state = action.MOVE
-				set_move_path(attack_target.position)
+				pathing.move_to_tile(attack_target.position)
 			else:
-				path = [];
+				pathing.clear_path()
 				attack(attack_target)
 
 
-func _physics_process(delta):				
+func _physics_process(_delta):				
 	move_and_slide()
 
 
@@ -67,30 +66,6 @@ func _input(event):
 	if(event is InputEventMouse):
 		if event.is_pressed() and event.button_index == MOUSE_BUTTON_RIGHT:
 			pass
-
-func set_move_path(target):
-	path = world.get_move_path(position, target)
-	if(path.size() > 1):
-		has_path = true
-		path_index = 1
-	else:
-		has_path = false;
-		velocity = Vector2.ZERO
-
-func follow_path():
-	var target_point = path[path_index]
-	var dir = position.direction_to(target_point)
-	var forgiveness = world.CELL_SIZE/2
-	if(path_index == path.size()-1):
-		forgiveness = 2
-	if(position.distance_to(target_point) < forgiveness):
-		path_index+=1;
-		if(path_index >= path.size()):
-			has_path = false;
-			path_index = 0;
-			dir = Vector2.ZERO
-	return dir;
-
 
 func set_facing_direction():
 	
