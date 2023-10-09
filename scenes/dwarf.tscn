@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://c80fvbsglni3n"]
+[gd_scene load_steps=25 format=3 uid="uid://c80fvbsglni3n"]
 
 [ext_resource type="Script" path="res://scripts/dwarf.gd" id="1_tk2xj"]
 [ext_resource type="Texture2D" uid="uid://cf3khct6h0rfl" path="res://assets/images/character/char-2b-Sheet.png" id="2_jdg20"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bcgdp67pwp6ro" path="res://assets/images/character/char-2sl-Sheet.png" id="4_kfcwy"]
 [ext_resource type="Texture2D" uid="uid://letck8re1hot" path="res://assets/images/light.png" id="6_6l45x"]
 [ext_resource type="Script" path="res://scripts/InventoryComponent.gd" id="7_d2rfx"]
+[ext_resource type="Script" path="res://scenes/PathingComponent.gd" id="8_5holc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_atarx"]
 size = Vector2(12, 12)
@@ -170,6 +171,9 @@ script = ExtResource("7_d2rfx")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InventoryComponent"]
 position = Vector2(0, 7)
 shape = SubResource("CircleShape2D_ses4m")
+
+[node name="PathingComponent" type="Node" parent="."]
+script = ExtResource("8_5holc")
 
 [connection signal="tree_exited" from="." to="." method="_on_tree_exited"]
 [connection signal="mouse_entered" from="ClickRegion" to="." method="_on_click_region_mouse_entered"]
