@@ -4,8 +4,8 @@ class_name Dwarf extends CharacterBody2D
 @export var move_speed := 50
 @export var dig_strength := 2
 @export var dig_speed := 1
-@export var max_health = 6
-var health
+# @export var max_health = 6
+# var health
 
 
 @onready var click_region : Area2D = $ClickRegion
@@ -15,6 +15,8 @@ var health
 @onready var path_line_scene := preload("res://scenes/path_line.tscn")
 @onready var wall_selection_scene := preload("res://scenes/wall_selection.tscn")
 @onready var pathing : PathingComponent = $PathingComponent
+# @onready var health : HealthComponent = $HealthComponent
+# @onready var hurtbox : HurtboxComponent = $HurtboxComponent
 
 const WALL_TEX_COORD = Vector2i(1, 1)
 const FLOOR_TEX_COORD = Vector2i(1, 4)
@@ -51,7 +53,6 @@ func _ready():
 	world.get_node("PathingUI").add_child(wall_selection)
 	wall_selection.visible = false
 
-	health = max_health
 
 	display_name = get_dwarf_name()
 
@@ -116,10 +117,6 @@ func update_selected():
 		wall_selection.visible = false
 
 func _physics_process(_delta):
-	if(health <= 0):
-
-		action_state = action.DEATH
-		queue_free() #will need to pull out later till end of death step
 
 	update_selected()
 

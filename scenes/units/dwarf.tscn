@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://c80fvbsglni3n"]
+[gd_scene load_steps=24 format=3 uid="uid://c80fvbsglni3n"]
 
 [ext_resource type="Script" path="res://scripts/dwarf.gd" id="1_tk2xj"]
 [ext_resource type="Texture2D" uid="uid://cf3khct6h0rfl" path="res://assets/images/character/char-2b-Sheet.png" id="2_jdg20"]
@@ -6,7 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://mn4mw6wd55vf" path="res://assets/images/ui/selector.png" id="3_ed2gd"]
 [ext_resource type="Texture2D" uid="uid://bcgdp67pwp6ro" path="res://assets/images/character/char-2sl-Sheet.png" id="4_kfcwy"]
 [ext_resource type="Texture2D" uid="uid://letck8re1hot" path="res://assets/images/light.png" id="6_6l45x"]
-[ext_resource type="Script" path="res://scripts/InventoryComponent.gd" id="7_d2rfx"]
 [ext_resource type="PackedScene" uid="uid://b08sx1tqt8nq1" path="res://scenes/components/pathing_component.tscn" id="8_tla1e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_atarx"]
@@ -165,10 +164,7 @@ energy = 0.5
 blend_mode = 2
 texture = ExtResource("6_6l45x")
 
-[node name="InventoryComponent" type="Area2D" parent="."]
-script = ExtResource("7_d2rfx")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="InventoryComponent"]
+[node name="InventoryComponent@CollisionShape2D2" type="CollisionShape2D" parent="."]
 position = Vector2(0, 7)
 shape = SubResource("CircleShape2D_ses4m")
 
@@ -177,4 +173,3 @@ shape = SubResource("CircleShape2D_ses4m")
 [connection signal="tree_exited" from="." to="." method="_on_tree_exited"]
 [connection signal="mouse_entered" from="ClickRegion" to="." method="_on_click_region_mouse_entered"]
 [connection signal="mouse_exited" from="ClickRegion" to="." method="_on_click_region_mouse_exited"]
-[connection signal="area_entered" from="InventoryComponent" to="InventoryComponent" method="_on_area_entered"]
