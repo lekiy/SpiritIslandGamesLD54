@@ -4,8 +4,6 @@ class_name Dwarf extends CharacterBody2D
 @export var move_speed := 50
 @export var dig_strength := 2
 @export var dig_speed := 1
-# @export var max_health = 6
-# var health
 
 
 @onready var click_region : Area2D = $ClickRegion
@@ -15,7 +13,7 @@ class_name Dwarf extends CharacterBody2D
 @onready var path_line_scene := preload("res://scenes/path_line.tscn")
 @onready var wall_selection_scene := preload("res://scenes/wall_selection.tscn")
 @onready var pathing : PathingComponent = $PathingComponent
-# @onready var health : HealthComponent = $HealthComponent
+@onready var health : HealthComponent = $HealthComponent
 # @onready var hurtbox : HurtboxComponent = $HurtboxComponent
 
 const WALL_TEX_COORD = Vector2i(1, 1)
@@ -64,7 +62,6 @@ func _input(event):
 				
 			else:
 				selected = false;
-				
 			
 		if event.is_pressed() and event.button_index == MOUSE_BUTTON_RIGHT and selected:
 			var camera = get_parent().get_node("GameCamera")

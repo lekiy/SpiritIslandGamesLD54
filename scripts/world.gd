@@ -16,11 +16,11 @@ const CELL_SIZE = 20
 # @onready var selection_poly = $Polygon2D
 @onready var pathing_ui = $PathingUI
 @onready var astar = AStarGrid2D.new()
-@onready var minimap_scene := preload("res://scenes/minimap.tscn")
+@onready var minimap_scene := preload("res://scenes/ui/minimap.tscn")
 @onready var spawn_scene := preload("res://scenes/spawn_cave.tscn")
 @onready var break_fx := preload("res://scenes/break_fx.tscn")
 
-@onready var dwarf_scene := preload("res://scenes/dwarf.tscn")
+@onready var dwarf_scene := preload("res://scenes/units/dwarf.tscn")
 @onready var goblin_scene := preload("res://scenes/goblin.tscn")
 
 @onready var torch_scene := preload("res://scenes/torch.tscn")

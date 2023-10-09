@@ -79,7 +79,7 @@ func set_facing_direction():
 func attack(target):
 	if(can_attack):
 		can_attack = false
-		target.health -= attack_damage
+		target.health.damage(attack_damage)
 		await get_tree().create_timer(attack_rate).timeout
 		can_attack = true
 

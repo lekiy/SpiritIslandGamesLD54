@@ -1,5 +1,5 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1696824102
+::res://::1696824852
 icon.svg::CompressedTexture2D::8846930954027897429::1695873383::1695873403::1::::<><>::
 ::res://assets/::1696619822
 Kenney Mini Square.ttf::FontFile::2760998542269645777::1696619821::1696619822::1::::<><>::
@@ -29,12 +29,12 @@ goblinL-Sheet.png::CompressedTexture2D::4592201181317427561::1696192973::1696194
 goblinR-Sheet.png::CompressedTexture2D::13927993367525235::1696192990::1696194002::1::::<><>::
 pickaxe.png::CompressedTexture2D::1575599470996031197::1696561497::1696561522::1::::<><>::
 test_dwarf.png::CompressedTexture2D::2244683152340545097::1696043184::1696194002::1::::<><>::
-::res://assets/images/environment/::1696822764
+::res://assets/images/environment/::1696824143
 abyss1.png::CompressedTexture2D::6383000747956090531::1696124876::1696193983::1::::<><>::
 abyss2.png::CompressedTexture2D::4628173810194720765::1696118575::1696193983::1::::<><>::
 cavewall1.png::CompressedTexture2D::1753718878394033162::1696124859::1696193983::1::::<><>::
 cavewall2.png::CompressedTexture2D::9216865735850053089::1696118552::1696193983::1::::<><>::
-cave_tileset.tres::TileSet::7214829046843625236::1696822764::0::1::::<><>::uid://cgnr7yqpndup2
+cave_tileset.tres::TileSet::7214829046843625236::1696824915::0::1::::<><>::uid://cgnr7yqpndup2::::res://assets/images/environment/tilemap.png
 shack_closed.png::CompressedTexture2D::7356329408431478722::1696118446::1696193983::1::::<><>::
 shack_open.png::CompressedTexture2D::1277128648309533592::1696118425::1696193983::1::::<><>::
 test_tile.png::CompressedTexture2D::6809519811067353696::1696042388::1696193983::1::::<><>::
@@ -62,7 +62,8 @@ spawn_cave.tscn::PackedScene::7485124888798037597::1696645337::0::1::::<><>::uid
 torch.tscn::PackedScene::4863572414438964809::1696645337::0::1::::<><>::uid://kusre8023awl
 wall_selection.tscn::PackedScene::332879623328576912::1696189623::0::1::::<><>::
 world.tscn::PackedScene::780915711859077566::1696822764::0::1::::<><>::uid://da16geot1w31a
-::res://scenes/components/::1696822895
+::res://scenes/components/::1696824780
+health_component.tscn::PackedScene::5206880633456452853::1696824780::0::1::::<><>::res://scripts/components/HealthComponent.gd
 pathing_component.tscn::PackedScene::4210401615369549670::1696822895::0::1::::<><>::res://scripts/components/PathingComponent.gd
 ::res://scenes/ui/::1696820074
 dwarf_display.tscn::PackedScene::274985561991550760::1696820074::0::1::::<><>::res://scripts/DwarfDisplay.gd<>uid://da8pawh4rhbpf
@@ -70,11 +71,11 @@ gui_health_bar.tscn::PackedScene::7135297142927937783::1696820074::0::1::::<><>:
 gui_heart.tscn::PackedScene::108859542157673237::1696820074::0::1::::<><>::uid://dq65dr3qg5t1s
 team_display.tscn::PackedScene::8468913080841353830::1696820074::0::1::::<><>::res://scripts/TeamDisplay.gd
 ui.tscn::PackedScene::4660731247220099382::1696820074::0::1::::<><>::uid://dswn0438cvsqw
-::res://scenes/units/::1696824078
-dwarf.tscn::PackedScene::7141023818546263357::1696823979::0::1::::<><>::res://scripts/dwarf.gd<>uid://cf3khct6h0rfl::::res://assets/images/character/char-2b-Sheet.png<>uid://da8pawh4rhbpf::::res://assets/images/character/char-2f-Sheet.png<>uid://mn4mw6wd55vf::::res://assets/images/ui/selector.png<>uid://bcgdp67pwp6ro::::res://assets/images/character/char-2sl-Sheet.png<>uid://letck8re1hot::::res://assets/images/light.png<>uid://b08sx1tqt8nq1::::res://scenes/components/pathing_component.tscn
+::res://scenes/units/::1696824783
+dwarf.tscn::PackedScene::7141023818546263357::1696824915::0::1::::<><>::res://scripts/dwarf.gd<>uid://cf3khct6h0rfl::::res://assets/images/character/char-2b-Sheet.png<>uid://da8pawh4rhbpf::::res://assets/images/character/char-2f-Sheet.png<>uid://mn4mw6wd55vf::::res://assets/images/ui/selector.png<>uid://bcgdp67pwp6ro::::res://assets/images/character/char-2sl-Sheet.png<>uid://letck8re1hot::::res://assets/images/light.png<>uid://cggitff4yw6kv::::res://scenes/components/health_component.tscn<>uid://b08sx1tqt8nq1::::res://scenes/components/pathing_component.tscn
 ::res://scripts/::1696823257
 break_fx.gd::GDScript::-1::1696624058::0::1::::BreakFX<>AnimatedSprite2D<>::
-dwarf.gd::GDScript::-1::1696824062::0::1::::Dwarf<>CharacterBody2D<>::
+dwarf.gd::GDScript::-1::1696824752::0::1::::Dwarf<>CharacterBody2D<>::
 DwarfDisplay.gd::GDScript::-1::1696650558::0::1::::DwarfDisplay<>VBoxContainer<>::
 goblin.gd::GDScript::-1::1696819606::0::1::::<>CharacterBody2D<>::
 GuiHealthBar.gd::GDScript::-1::1696647847::0::1::::GuiHealthBar<>HBoxContainer<>::
@@ -86,6 +87,7 @@ ResourceItem.gd::GDScript::-1::1696610254::0::1::::ResourceItem<>Resource<>::
 Selector.gd::GDScript::-1::1696047371::0::1::::<>Sprite2D<>::
 TeamDisplay.gd::GDScript::-1::1696647847::0::1::::TeamDisplay<>GridContainer<>::
 world.gd::GDScript::-1::1696822792::0::1::::World<>TileMap<>::
-::res://scripts/components/::1696823257
+::res://scripts/components/::1696824538
+HealthComponent.gd::GDScript::-1::1696824689::0::1::::HealthComponent<>Node<>::
 InventoryComponent.gd::GDScript::-1::1696610583::0::1::::InventoryComponent<>Area2D<>::
 PathingComponent.gd::GDScript::-1::1696819319::0::1::::PathingComponent<>Node<>::
