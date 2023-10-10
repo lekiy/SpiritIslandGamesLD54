@@ -1,12 +1,11 @@
 class_name Dwarf extends CharacterBody2D
 
-@export var selected := false
 @export var move_speed := 50
 @export var dig_strength := 2
 @export var dig_speed := 1
 
 
-@onready var click_region : Area2D = $ClickRegion
+@onready var select_region : SelectionComponent = $SelectionComponent
 @onready var selector_sprite : Sprite2D = $Selector
 @onready var world : TileMap = get_parent()
 @onready var sprite = $AnimatedSprite2D
@@ -33,7 +32,7 @@ enum action {
 const directions = [Vector2.UP, Vector2.DOWN, Vector2.RIGHT, Vector2.LEFT]
 var display_name
 var lifetime = 0;
-var mouse_over = false;
+# var mouse_over = false;
 var action_state = action.IDLE
 var can_dig = true
 var dig_target
@@ -56,14 +55,8 @@ func _ready():
 
 func _input(event):
 	if(event is InputEventMouse):
-		if event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT:
-			if(mouse_over):
-				selected = true
-				
-			else:
-				selected = false;
 			
-		if event.is_pressed() and event.button_index == MOUSE_BUTTON_RIGHT and selected:
+		if event.is_pressed() and event.button_index == MOUSE_BUTTON_RIGHT and select_region.selected:
 			var camera = get_parent().get_node("GameCamera")
 			var target_pos : Vector2 = camera.position + event.position - Vector2(160, 90)
 			
@@ -86,7 +79,7 @@ func get_dwarf_name():
 		"Grizzly",
 		"Todard",
 		"Pagruph",
-		"balgruff"
+		"Balgruff"
 	]
 
 	names.shuffle()
@@ -103,7 +96,7 @@ func set_facing_direction():
 		
 
 func update_selected():
-	if selected:
+	if select_region.selected:
 		selector_sprite.visible = true
 		path_line.visible = true
 		wall_selection.visible = true
@@ -120,7 +113,7 @@ func _physics_process(_delta):
 	lifetime+=1;
 	selector_sprite.position.y += (pingpong(lifetime*0.5, 4)-2)*.25
 
-	if(selected and dig_target):
+	if(select_region.selected and dig_target):
 		var origin = world.map_to_local(world.local_to_map(dig_target))-Vector2(world.CELL_SIZE/2, world.CELL_SIZE/2)
 		wall_selection.polygon = ([origin, Vector2(origin.x+world.CELL_SIZE, origin.y), Vector2(origin.x+world.CELL_SIZE, origin.y+world.CELL_SIZE), Vector2(origin.x, origin.y+world.CELL_SIZE)])
 		wall_selection.visible = true;
@@ -174,11 +167,6 @@ func set_anim_direction(animation_sub_name: String):
 			sprite.play(animation_sub_name+"_side")
 			sprite.flip_h = false
 
-func _on_click_region_mouse_exited():
-	mouse_over = false
-
-func _on_click_region_mouse_entered():
-	mouse_over = true
 
 func _on_tree_exited():
 	world.remove_dwarf()

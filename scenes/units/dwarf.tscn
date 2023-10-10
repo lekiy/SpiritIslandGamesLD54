@@ -1,16 +1,22 @@
-[gd_scene load_steps=24 format=3 uid="uid://c80fvbsglni3n"]
+[gd_scene load_steps=27 format=3 uid="uid://c80fvbsglni3n"]
 
 [ext_resource type="Script" path="res://scripts/dwarf.gd" id="1_tk2xj"]
 [ext_resource type="Texture2D" uid="uid://cf3khct6h0rfl" path="res://assets/images/character/char-2b-Sheet.png" id="2_jdg20"]
 [ext_resource type="Texture2D" uid="uid://da8pawh4rhbpf" path="res://assets/images/character/char-2f-Sheet.png" id="3_04lox"]
 [ext_resource type="Texture2D" uid="uid://mn4mw6wd55vf" path="res://assets/images/ui/selector.png" id="3_ed2gd"]
 [ext_resource type="Texture2D" uid="uid://bcgdp67pwp6ro" path="res://assets/images/character/char-2sl-Sheet.png" id="4_kfcwy"]
+[ext_resource type="Texture2D" uid="uid://e532081pmm00" path="res://assets/images/pickaxe.png" id="5_bbv5f"]
 [ext_resource type="Texture2D" uid="uid://letck8re1hot" path="res://assets/images/light.png" id="6_6l45x"]
+[ext_resource type="Script" path="res://scripts/components/SelectionComponent.gd" id="6_d0qoc"]
 [ext_resource type="PackedScene" uid="uid://cggitff4yw6kv" path="res://scenes/components/health_component.tscn" id="8_0jt37"]
 [ext_resource type="PackedScene" uid="uid://b08sx1tqt8nq1" path="res://scenes/components/pathing_component.tscn" id="8_tla1e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_atarx"]
 size = Vector2(12, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iuxqd"]
+atlas = ExtResource("5_bbv5f")
+region = Rect2(0, 0, 11, 11)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ilyq8"]
 atlas = ExtResource("2_jdg20")
@@ -48,13 +54,13 @@ region = Rect2(0, 0, 20, 20)
 atlas = ExtResource("3_04lox")
 region = Rect2(40, 0, 20, 20)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_h0adb"]
-atlas = ExtResource("4_kfcwy")
-region = Rect2(20, 0, 20, 20)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_w6dev"]
 atlas = ExtResource("4_kfcwy")
 region = Rect2(0, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h0adb"]
+atlas = ExtResource("4_kfcwy")
+region = Rect2(20, 0, 20, 20)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_s272k"]
 atlas = ExtResource("4_kfcwy")
@@ -116,6 +122,9 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_w6dev")
+}, {
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_h0adb")
 }, {
 "duration": 1.0,
@@ -136,18 +145,29 @@ size = Vector2(16, 16)
 script = ExtResource("1_tk2xj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, 4)
 shape = SubResource("RectangleShape2D_atarx")
+metadata/_edit_lock_ = true
+
+[node name="HeldItem" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(2.08595e-07, 8)
+rotation = -0.523599
+texture = SubResource("AtlasTexture_iuxqd")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_ppkm6")
 animation = &"walk_side"
-frame_progress = 0.0413254
+frame = 3
+frame_progress = 0.675284
 
-[node name="ClickRegion" type="Area2D" parent="."]
+[node name="SelectionComponent" type="Area2D" parent="."]
+script = ExtResource("6_d0qoc")
+metadata/_edit_lock_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ClickRegion"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SelectionComponent"]
 position = Vector2(0, 2)
 shape = SubResource("RectangleShape2D_o0t12")
 
@@ -155,17 +175,20 @@ shape = SubResource("RectangleShape2D_o0t12")
 visible = false
 position = Vector2(0, -14)
 texture = ExtResource("3_ed2gd")
+metadata/_edit_lock_ = true
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
+visible = false
 scale = Vector2(0.1, 0.1)
 energy = 0.5
 blend_mode = 2
 texture = ExtResource("6_6l45x")
+metadata/_edit_lock_ = true
 
 [node name="PathingComponent" parent="." instance=ExtResource("8_tla1e")]
 
 [node name="HealthComponent" parent="." instance=ExtResource("8_0jt37")]
 
 [connection signal="tree_exited" from="." to="." method="_on_tree_exited"]
-[connection signal="mouse_entered" from="ClickRegion" to="." method="_on_click_region_mouse_entered"]
-[connection signal="mouse_exited" from="ClickRegion" to="." method="_on_click_region_mouse_exited"]
+[connection signal="mouse_entered" from="SelectionComponent" to="SelectionComponent" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="SelectionComponent" to="SelectionComponent" method="_on_mouse_exited"]
