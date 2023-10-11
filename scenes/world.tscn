@@ -1,23 +1,47 @@
-[gd_scene load_steps=5 format=3 uid="uid://lejtkiexy4a1"]
+[gd_scene load_steps=6 format=3 uid="uid://lejtkiexy4a1"]
 
 [ext_resource type="TileSet" uid="uid://da16geot1w31a" path="res://assets/images/environment/cave_tileset.tres" id="1_8faki"]
 [ext_resource type="Script" path="res://scripts/world.gd" id="2_vo4iv"]
+[ext_resource type="PackedScene" uid="uid://djfkcqau1fp0y" path="res://scenes/world_gen.tscn" id="3_45c3p"]
 [ext_resource type="PackedScene" uid="uid://d1t1in4621rg8" path="res://scenes/game_camera.tscn" id="3_t07h3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dxr81"]
 size = Vector2(0, 0)
 
 [node name="World" type="TileMap" groups=["World"]]
+y_sort_enabled = true
 tile_set = ExtResource("1_8faki")
 cell_quadrant_size = 20
 format = 2
+layer_0/name = "Base"
+layer_0/z_index = -1
+layer_1/name = "Resources"
+layer_1/enabled = true
+layer_1/modulate = Color(1, 1, 1, 1)
+layer_1/y_sort_enabled = true
+layer_1/y_sort_origin = 0
+layer_1/z_index = 0
+layer_1/tile_data = PackedInt32Array()
 script = ExtResource("2_vo4iv")
-map_width = 70
-map_height = 70
+
+[node name="WorldGen" parent="." instance=ExtResource("3_45c3p")]
+width = 60
+height = 60
+show_generated = false
+
+[node name="StoneGen" parent="." instance=ExtResource("3_45c3p")]
+width = 60
+height = 60
+world_seed = "Stone"
+noise_frequency = 0.25
+noise_gain = 0.3
+noise_threshhold = -0.2
+show_generated = false
 
 [node name="GameCamera" parent="." instance=ExtResource("3_t07h3")]
 position_smoothing_enabled = true
 position_smoothing_speed = 15.0
+scroll_speed = 500
 
 [node name="SelectionArea" type="Area2D" parent="GameCamera"]
 

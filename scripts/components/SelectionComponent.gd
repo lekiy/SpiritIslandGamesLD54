@@ -12,8 +12,8 @@ func _on_mouse_entered():
 func _input(event):
 	if(event is InputEventMouse):
 		if event.is_pressed() and event.button_index == MOUSE_BUTTON_LEFT:
-			# if(mouse_over):
-			# 	selected = true
+			if(mouse_over):
+				selected = true
 				
-			# else:
-			selected = false;
+			else:
+				selected = false;
