@@ -1,7 +1,6 @@
-[gd_scene load_steps=11 format=3 uid="uid://b1kj2fjb5byvp"]
+[gd_scene load_steps=10 format=3 uid="uid://b1kj2fjb5byvp"]
 
 [ext_resource type="Shader" path="res://scenes/mist.gdshader" id="1_nnine"]
-[ext_resource type="Texture2D" uid="uid://letck8re1hot" path="res://assets/images/light.png" id="2_0di0n"]
 [ext_resource type="Script" path="res://scripts/fog.gd" id="2_xngku"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_ld6ju"]
@@ -25,7 +24,6 @@ shader_parameter/distortion_strength = -0.00999995
 shader_parameter/top_color = Color(1, 0.572549, 1, 0.588235)
 shader_parameter/noise1 = SubResource("NoiseTexture2D_fw2n5")
 shader_parameter/noise2 = SubResource("NoiseTexture2D_h10l5")
-shader_parameter/clear = ExtResource("2_0di0n")
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_ghygm"]
 seed = 2
