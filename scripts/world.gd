@@ -29,6 +29,9 @@ const CELL_SIZE = 20
 @onready var world_gen := $WorldGen
 @onready var stone_gen := $StoneGen
 
+@onready var crystal := $MainCrystal
+@onready var fog := $Fog
+
 var max_dwarves = 2
 var dwarves_count = 0
 
@@ -58,6 +61,11 @@ func _ready():
 	spawn_dwarf()
 
 	# update_cell_terrain()
+	fog.position = map_to_local(Vector2(map_width*0.5, map_height*0.5))
+	fog.texture.width = map_width*CELL_SIZE
+	fog.texture.height = map_height*CELL_SIZE
+	fog.z_index = RenderingServer.CANVAS_ITEM_Z_MAX
+	crystal.position = map_to_local(Vector2(map_width*0.5, map_height*0.5))
 	setup_durability_matrix()
 
 func _input(event):
@@ -94,6 +102,8 @@ func fill_world():
 				var stone = stone_gen.cell_map[x+y*map_width]
 				if(stone):
 					set_cell(RESOURCE_LAYER, Vector2i(x, y), 1, Vector2i(randi_range(0, 4), 0))
+					astar.set_point_solid(Vector2i(x, y), true)
+
 				
 
 func add_spawn_area():

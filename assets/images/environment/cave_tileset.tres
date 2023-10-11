@@ -469,7 +469,6 @@ texture_region_size = Vector2i(20, 20)
 3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8.39689, -0.530331, 8.39689, -0.707108, 6.98268, 3.0052, -0.0883884, 5.48008, -5.74524, 4.41942)
 3:0/0/custom_data_0 = 8
 4:0/0 = 0
-4:0/0/y_sort_origin = 8
 4:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 4:0/0/physics_layer_0/angular_velocity = 0.0
 4:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8.22012, 3.18198, 10, 1.41421, 8.39689, 5.83363, 3.62392, 8.48528, -4.68458, 8.3085)

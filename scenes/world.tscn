@@ -1,9 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://lejtkiexy4a1"]
+[gd_scene load_steps=9 format=3 uid="uid://lejtkiexy4a1"]
 
 [ext_resource type="TileSet" uid="uid://da16geot1w31a" path="res://assets/images/environment/cave_tileset.tres" id="1_8faki"]
 [ext_resource type="Script" path="res://scripts/world.gd" id="2_vo4iv"]
 [ext_resource type="PackedScene" uid="uid://djfkcqau1fp0y" path="res://scenes/world_gen.tscn" id="3_45c3p"]
 [ext_resource type="PackedScene" uid="uid://d1t1in4621rg8" path="res://scenes/game_camera.tscn" id="3_t07h3"]
+[ext_resource type="PackedScene" uid="uid://dv0m5sk0vw06s" path="res://scenes/main_crystal.tscn" id="5_npu2u"]
+[ext_resource type="Texture2D" uid="uid://cf1vfhdryy3g7" path="res://assets/images/structures/crystalv3.png" id="6_8nr7v"]
+[ext_resource type="PackedScene" uid="uid://b1kj2fjb5byvp" path="res://scenes/fog.tscn" id="6_mdgtm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dxr81"]
 size = Vector2(0, 0)
@@ -54,3 +57,10 @@ visible = false
 color = Color(0, 0, 0, 1)
 
 [node name="PathingUI" type="Node" parent="."]
+
+[node name="MainCrystal" parent="." instance=ExtResource("5_npu2u")]
+texture = ExtResource("6_8nr7v")
+
+[node name="Fog" parent="." instance=ExtResource("6_mdgtm")]
+z_as_relative = false
+position = Vector2(81, -148)
