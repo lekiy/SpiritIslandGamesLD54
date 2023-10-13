@@ -14,5 +14,5 @@ void fragment() {
 	float depth = texture_col.r;
 	vec4 screen_col = texture(SCREEN_TEXTURE, SCREEN_UV + distortion_strength * vec2(depth));
 	vec4 mask_col = texture(mask, UV);
-	COLOR = texture_col*(screen_col*top_color);
+	COLOR = texture_col*(screen_col*top_color)*mask_col;
 }
