@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://ch3nbcynn54ro"]
+
+[ext_resource type="Script" path="res://scripts/test_image.gd" id="1_oj2bv"]
+
+[node name="Sprite2D" type="Sprite2D"]
+position = Vector2(139, 81)
+script = ExtResource("1_oj2bv")

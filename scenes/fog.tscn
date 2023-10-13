@@ -1,7 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://b1kj2fjb5byvp"]
+[gd_scene load_steps=11 format=3 uid="uid://b1kj2fjb5byvp"]
 
 [ext_resource type="Shader" path="res://scenes/mist.gdshader" id="1_nnine"]
 [ext_resource type="Script" path="res://scripts/fog.gd" id="2_xngku"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_177ls"]
+size = Vector2(512, 512)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_ld6ju"]
 
@@ -24,6 +27,7 @@ shader_parameter/distortion_strength = -0.00999995
 shader_parameter/top_color = Color(1, 0.572549, 1, 0.588235)
 shader_parameter/noise1 = SubResource("NoiseTexture2D_fw2n5")
 shader_parameter/noise2 = SubResource("NoiseTexture2D_h10l5")
+shader_parameter/mask = SubResource("PlaceholderTexture2D_177ls")
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_ghygm"]
 seed = 2
@@ -33,6 +37,6 @@ noise = SubResource("FastNoiseLite_ghygm")
 
 [node name="Fog" type="Sprite2D"]
 material = SubResource("ShaderMaterial_uq5g2")
-position = Vector2(115, 79)
+position = Vector2(256, 255)
 texture = SubResource("NoiseTexture2D_b6bhj")
 script = ExtResource("2_xngku")

@@ -4,10 +4,6 @@
 
 [node name="GameCamera" type="Camera2D"]
 position = Vector2(160, 89)
-limit_left = 0
-limit_top = 0
-limit_right = 1200
-limit_bottom = 1200
 limit_smoothed = true
 script = ExtResource("1_50kgj")
 scroll_speed = 200

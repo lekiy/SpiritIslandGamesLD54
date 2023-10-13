@@ -61,7 +61,7 @@ func _ready():
 	spawn_dwarf()
 
 	# update_cell_terrain()
-	fog.position = map_to_local(Vector2(map_width*0.5-CELL_SIZE*0.5, map_height*0.5-CELL_SIZE*0.5))
+	fog.position = Vector2(map_width*CELL_SIZE*0.5, map_height*CELL_SIZE*0.5)
 	fog.texture.width = map_width*CELL_SIZE
 	fog.texture.height = map_height*CELL_SIZE
 	fog.z_index = RenderingServer.CANVAS_ITEM_Z_MAX
