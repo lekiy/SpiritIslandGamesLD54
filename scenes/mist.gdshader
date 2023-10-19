@@ -18,11 +18,17 @@ void fragment() {
 	float depth = texture_col.r;
 	vec4 screen_col = texture(SCREEN_TEXTURE, SCREEN_UV + distortion_strength * vec2(depth));
 	float mask_col = 1.0;
+
 	for(int i = 0; i < mask_count; i++){
 		float radius = mask_scales[i];
 		vec2 position = mask_positions[i]*TEXTURE_PIXEL_SIZE;
-		if(distance(position, UV) < radius*TEXTURE_PIXEL_SIZE.x){
+		float dist = distance(position, UV)/TEXTURE_PIXEL_SIZE.x;
+		float fade_scale = 5.0;
+		if(dist < radius-fade_scale){
 			mask_col = 0.0; 
+		}
+		if(dist > radius-fade_scale && dist < radius){
+			mask_col = (dist-(radius-fade_scale))/fade_scale;
 		}
 	}
 	COLOR = texture_col*(screen_col*top_color)*mask_col;
