@@ -1,7 +1,20 @@
-extends Sprite2D
+class_name Fog extends Sprite2D
 
-
-# var shader_clear_texture : Texture2D = material.get_shader_param("clear")
+var mask_scales:= {}
+var mask_positions:= {}
+	
+func update_fog():
+	material.set("shader_parameter/mask_scales", mask_scales.values())
+	material.set("shader_parameter/mask_positions", mask_positions.values())
+	material.set("shader_parameter/mask_count", mask_positions.values().size())
+	
+func add_safe_region(key, position, radius):
+	mask_positions[key] = position
+	mask_scales[key] = radius
+	update_fog()
+	
+func _process(delta):
+	update_fog()
 
 func _input(event):
 	if(event.is_action_released("check_state")):

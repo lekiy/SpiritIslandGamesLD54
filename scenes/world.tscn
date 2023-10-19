@@ -61,6 +61,6 @@ color = Color(0, 0, 0, 1)
 [node name="MainCrystal" parent="." instance=ExtResource("5_npu2u")]
 texture = ExtResource("6_8nr7v")
 
-[node name="Fog" parent="." instance=ExtResource("6_mdgtm")]
+[node name="Fog" parent="." groups=["Fog"] instance=ExtResource("6_mdgtm")]
 z_as_relative = false
-position = Vector2(81, -148)
+position = Vector2(259, 262)

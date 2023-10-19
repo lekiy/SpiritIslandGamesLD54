@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://dv0m5sk0vw06s"]
+[gd_scene load_steps=5 format=3 uid="uid://dv0m5sk0vw06s"]
 
 [ext_resource type="Texture2D" uid="uid://ctm6v4hypumgr" path="res://assets/images/crystalv1.png" id="1_8sy8w"]
 [ext_resource type="PackedScene" uid="uid://cggitff4yw6kv" path="res://scenes/components/health_component.tscn" id="2_mlmyv"]
+[ext_resource type="PackedScene" uid="uid://0ejc1b0e6s3a" path="res://scenes/protection_area_component.tscn" id="3_b4f68"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pb7ui"]
 
@@ -10,9 +11,12 @@ position = Vector2(-1, 0)
 texture = ExtResource("1_8sy8w")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(2, 7)
 shape = SubResource("CircleShape2D_pb7ui")
 
 [node name="HealthComponent" parent="." instance=ExtResource("2_mlmyv")]
+
+[node name="ProtectionAreaComponent" parent="." instance=ExtResource("3_b4f68")]

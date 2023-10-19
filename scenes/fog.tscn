@@ -22,6 +22,9 @@ noise = SubResource("FastNoiseLite_tdwxp")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_uq5g2"]
 shader = ExtResource("1_nnine")
+shader_parameter/mask_count = null
+shader_parameter/mask_positions = null
+shader_parameter/mask_scales = null
 shader_parameter/scroll1 = Vector2(-0.01, 0.01)
 shader_parameter/scroll2 = Vector2(0.01, -0.01)
 shader_parameter/distortion_strength = -0.015
