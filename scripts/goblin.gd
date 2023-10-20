@@ -25,20 +25,19 @@ const directions = [Vector2.UP, Vector2.DOWN, Vector2.RIGHT, Vector2.LEFT]
 var facing_direction = Vector2.DOWN
 
 var lifetime = 0;
-var attack_target: Node2D
 var can_attack = true
 
 func _process(_delta):
 	match action_state:
 		action.IDLE:
-			if(attack_target):
+			if(aggro_region.current_target):
 				action_state = action.ATTACK
 
 			velocity = Vector2.ZERO
 			set_anim_direction("idle")
 			
 		action.MOVE:
-			if(attack_target and position.distance_to(attack_target.position) < attack_range):
+			if(aggro_region.current_target and global_position.distance_to(aggro_region.current_target.global_position) < attack_range):
 				action_state = action.ATTACK
 			if(pathing.has_path):
 				velocity = pathing.get_direction_to_path()*move_speed
@@ -48,14 +47,14 @@ func _process(_delta):
 			else:
 				action_state = action.IDLE
 		action.ATTACK:
-			if(!attack_target or !can_attack):
+			if(!aggro_region.current_target or !can_attack):
 				action_state = action.IDLE
-			elif(position.distance_to(attack_target.position) > attack_range):
+			elif(global_position.distance_to(aggro_region.current_target.global_position) > attack_range):
 				action_state = action.MOVE
-				pathing.move_to_tile(attack_target.position)
+				pathing.move_to_tile(aggro_region.current_target.global_position)
 			else:
 				pathing.clear_path()
-				attack(attack_target)
+				attack(aggro_region.current_target)
 
 
 func _physics_process(_delta):				
@@ -79,7 +78,8 @@ func set_facing_direction():
 func attack(target):
 	if(can_attack):
 		can_attack = false
-		target.health.damage(attack_damage)
+		var target_health = target.get_node("HealthComponent")
+		target_health.damage(attack_damage)
 		await get_tree().create_timer(attack_rate).timeout
 		can_attack = true
 
@@ -94,13 +94,3 @@ func set_anim_direction(animation_sub_name: String):
 		Vector2.LEFT:
 			sprite.play(animation_sub_name+"_left")
 
-func _on_aggro_region_body_entered(body:Node2D):
-	if(!attack_target):
-		if(body is Dwarf):
-			attack_target = body
-
-
-func _on_aggro_region_body_exited(body:Node2D):
-	if(attack_target):
-		if(body == attack_target):
-			attack_target = null

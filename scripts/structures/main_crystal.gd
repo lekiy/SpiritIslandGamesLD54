@@ -2,6 +2,7 @@ extends Sprite2D
 
 var time = 0
 var variation = randf()
+@onready var health : HealthComponent = $HealthComponent
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

@@ -147,7 +147,8 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o0t12"]
 size = Vector2(16, 16)
 
-[node name="Dwarf" type="CharacterBody2D" groups=["Dwarf"]]
+[node name="Dwarf" type="CharacterBody2D" groups=["Dwarf", "PlayerOwned"]]
+collision_mask = 7
 script = ExtResource("1_tk2xj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

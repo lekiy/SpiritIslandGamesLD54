@@ -79,6 +79,12 @@ spawn_light={
 ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="PlayerOwned"
+2d_physics/layer_2="Enemies"
+2d_physics/layer_3="Terrain"
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=3

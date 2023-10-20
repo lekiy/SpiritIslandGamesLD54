@@ -8,6 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://letck8re1hot" path="res://assets/images/light.png" id="4_53ns6"]
 [ext_resource type="Script" path="res://scripts/structures/main_crystal.gd" id="4_x3yvh"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_pb7ui"]
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_q5lyb"]
 shader = ExtResource("1_uwouu")
 shader_parameter/time = null
@@ -23,29 +25,30 @@ region = Rect2(40, 0, 40, 40)
 atlas = ExtResource("3_jou2k")
 region = Rect2(0, 0, 40, 40)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_pb7ui"]
+[node name="MainCrystal" type="StaticBody2D"]
+collision_mask = 7
 
-[node name="MainCrystal" type="Sprite2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2, 7)
+shape = SubResource("CircleShape2D_pb7ui")
+
+[node name="Sprite2D" type="Sprite2D" parent="." groups=["PlayerOwned"]]
 material = SubResource("ShaderMaterial_q5lyb")
 position = Vector2(-1, 0)
 texture = SubResource("AtlasTexture_p27kv")
 script = ExtResource("4_x3yvh")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="Sprite2D"]
 texture = SubResource("AtlasTexture_gg0f1")
-
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(2, 7)
-shape = SubResource("CircleShape2D_pb7ui")
 
 [node name="HealthComponent" parent="." instance=ExtResource("2_mlmyv")]
 
 [node name="ProtectionAreaComponent" parent="." instance=ExtResource("3_b4f68")]
 visible = false
+position = Vector2(-1, 0)
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(-1, 0)
 color = Color(0.670588, 1, 1, 1)
 blend_mode = 2
 texture = ExtResource("4_53ns6")
