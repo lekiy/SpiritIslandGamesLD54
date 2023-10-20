@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://ctm6v4hypumgr" path="res://assets/images/crystalv1.png" id="1_8sy8w"]
 [ext_resource type="PackedScene" uid="uid://cggitff4yw6kv" path="res://scenes/components/health_component.tscn" id="2_mlmyv"]
-[ext_resource type="PackedScene" uid="uid://0ejc1b0e6s3a" path="res://scenes/protection_area_component.tscn" id="3_b4f68"]
+[ext_resource type="PackedScene" uid="uid://268orc1vxkw6" path="res://scenes/protection_area_component.tscn" id="3_b4f68"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pb7ui"]
 
