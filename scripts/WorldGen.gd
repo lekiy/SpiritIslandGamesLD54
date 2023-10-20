@@ -46,7 +46,7 @@ func generate():
 				cell_map.append(0)
 
 
-func _process(delta):
+func _process(_delta):
 	if(show_generated):
 		queue_redraw()
 		redraw()	

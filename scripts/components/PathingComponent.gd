@@ -33,7 +33,7 @@ func get_direction_to_path() -> Vector2 :
 		
 	return dir
 
-func setup_line(path: Array[Vector2]):
+func setup_line(_path: Array[Vector2]):
 	pass
 
 func clear_path():

@@ -6,7 +6,7 @@ class_name BreakFX extends AnimatedSprite2D
 var health = 8;
 var max_health;
 
-func _process(delta):
+func _process(_delta):
 	var tile = world.local_to_map(position)
 	health = world.tile_durability_matrix[tile.x][tile.y]
 

@@ -8,12 +8,12 @@ func update_fog():
 	material.set("shader_parameter/mask_positions", mask_positions.values())
 	material.set("shader_parameter/mask_count", mask_positions.values().size())
 	
-func add_safe_region(key, position, radius):
-	mask_positions[key] = position
+func add_safe_region(key, region_position, radius):
+	mask_positions[key] = region_position
 	mask_scales[key] = radius
 	update_fog()
 	
-func _process(delta):
+func _process(_delta):
 	update_fog()
 
 func _input(event):

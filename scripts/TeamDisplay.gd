@@ -12,13 +12,14 @@ func _ready():
 
 
 func _on_dwarf_count_changed():
-	var dwarves = get_tree().get_nodes_in_group("Dwarf")
-	var new_displays : Array[DwarfDisplay] = []
-	for display in displays:
-		display.queue_free()
-	for dwarf in dwarves:
-		var display = dwarf_display_template.instantiate()
-		new_displays.append(display)
-		display_container.add_child(display)
-		display.update_data(dwarf)
-	displays = new_displays
+	if(get_tree()):
+		var dwarves = get_tree().get_nodes_in_group("Dwarf")
+		var new_displays : Array[DwarfDisplay] = []
+		for display in displays:
+			display.queue_free()
+		for dwarf in dwarves:
+			var display = dwarf_display_template.instantiate()
+			new_displays.append(display)
+			display_container.add_child(display)
+			display.update_data(dwarf)
+		displays = new_displays

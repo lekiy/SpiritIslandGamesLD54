@@ -1,17 +1,40 @@
-[gd_scene load_steps=5 format=3 uid="uid://dv0m5sk0vw06s"]
+[gd_scene load_steps=12 format=3 uid="uid://dv0m5sk0vw06s"]
 
-[ext_resource type="Texture2D" uid="uid://ctm6v4hypumgr" path="res://assets/images/crystalv1.png" id="1_8sy8w"]
+[ext_resource type="Shader" path="res://scripts/shaders/shine.gdshader" id="1_uwouu"]
 [ext_resource type="PackedScene" uid="uid://cggitff4yw6kv" path="res://scenes/components/health_component.tscn" id="2_mlmyv"]
+[ext_resource type="Texture2D" uid="uid://dfskqy84031cb" path="res://assets/images/shine_fx-export.png" id="2_q8yjb"]
 [ext_resource type="PackedScene" uid="uid://268orc1vxkw6" path="res://scenes/protection_area_component.tscn" id="3_b4f68"]
+[ext_resource type="Texture2D" uid="uid://c5a6pk4k0kg1j" path="res://assets/images/structures/crystal_large.png" id="3_jou2k"]
+[ext_resource type="Texture2D" uid="uid://letck8re1hot" path="res://assets/images/light.png" id="4_53ns6"]
+[ext_resource type="Script" path="res://scripts/structures/main_crystal.gd" id="4_x3yvh"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q5lyb"]
+shader = ExtResource("1_uwouu")
+shader_parameter/time = null
+shader_parameter/speed = 5.0
+shader_parameter/tint_color = Color(0, 1, 1, 1)
+shader_parameter/shine_texture = ExtResource("2_q8yjb")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p27kv"]
+atlas = ExtResource("3_jou2k")
+region = Rect2(40, 0, 40, 40)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gg0f1"]
+atlas = ExtResource("3_jou2k")
+region = Rect2(0, 0, 40, 40)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pb7ui"]
 
 [node name="MainCrystal" type="Sprite2D"]
+material = SubResource("ShaderMaterial_q5lyb")
 position = Vector2(-1, 0)
-texture = ExtResource("1_8sy8w")
+texture = SubResource("AtlasTexture_p27kv")
+script = ExtResource("4_x3yvh")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_gg0f1")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(2, 7)
@@ -20,3 +43,10 @@ shape = SubResource("CircleShape2D_pb7ui")
 [node name="HealthComponent" parent="." instance=ExtResource("2_mlmyv")]
 
 [node name="ProtectionAreaComponent" parent="." instance=ExtResource("3_b4f68")]
+visible = false
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+color = Color(0.670588, 1, 1, 1)
+blend_mode = 2
+texture = ExtResource("4_53ns6")
+texture_scale = 0.5

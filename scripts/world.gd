@@ -51,7 +51,7 @@ func _ready():
 	
 	astar.region = Rect2i(0, 0, map_width, map_height)
 	astar.cell_size = Vector2i(CELL_SIZE, CELL_SIZE)
-	astar.offset = Vector2i(CELL_SIZE/2, CELL_SIZE/2)
+	astar.offset = Vector2i(CELL_SIZE*0.5, CELL_SIZE*0.5)
 	astar.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_ONLY_IF_NO_OBSTACLES
 	astar.default_compute_heuristic = AStarGrid2D.HEURISTIC_EUCLIDEAN
 	astar.update()
@@ -129,7 +129,7 @@ func update_cell_terrain():
 		if(tile_type == FLOOR_TEX_COORD):
 			set_cells_terrain_connect(FLOOR_LAYER, [cell], 0, 0)
 
-func _process(delta):
+func _process(_delta):
 	if(Input.is_action_just_pressed("spawn_dwarf")):
 		spawn_dwarf()
 
@@ -176,19 +176,19 @@ func spawn_object(object_scene, spawn_position):
 
 
 func get_world_map_center():
-	return Vector2i(map_width/2, map_height/2)
+	return Vector2(map_width*0.5, map_height*0.5)
 
-func get_move_path(position: Vector2, target: Vector2):
+func get_move_path(start: Vector2, target: Vector2):
 	var type = get_cell_atlas_coords(FLOOR_LAYER, local_to_map(target))
 	if(type == WALL_TEX_COORD):
 		var neighbors = get_surrounding_cells(local_to_map(target))
-		neighbors.sort_custom(func(a, b): return position.distance_to(map_to_local(a)) < position.distance_to(map_to_local(b)))
+		neighbors.sort_custom(func(a, b): return start.distance_to(map_to_local(a)) < start.distance_to(map_to_local(b)))
 		for cell in neighbors:
 			if(get_cell_atlas_coords(FLOOR_LAYER, cell) != WALL_TEX_COORD):
-				return astar.get_point_path(local_to_map(position), cell)
+				return astar.get_point_path(local_to_map(start), cell)
 		return [];
 	else:
-		return astar.get_point_path(local_to_map(position), local_to_map(target))
+		return astar.get_point_path(local_to_map(start), local_to_map(target))
 		
 
 func get_tile(target):
@@ -221,6 +221,6 @@ func spawn_resources(tile_position, tile_type):
 			for i in randi_range(1, 2):
 				var rock = rock_scene.instantiate()
 				add_child(rock)
-				rock.position = map_to_local(tile_position)+Vector2(randf_range(-CELL_SIZE/4, CELL_SIZE/4), randf_range(-CELL_SIZE/4, CELL_SIZE/4))
+				rock.position = map_to_local(tile_position)+Vector2(randf_range(-CELL_SIZE*0.25, CELL_SIZE*0.25), randf_range(-CELL_SIZE*0.25, CELL_SIZE*0.25))
 
 
