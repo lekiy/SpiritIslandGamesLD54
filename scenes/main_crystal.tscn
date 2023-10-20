@@ -41,7 +41,9 @@ script = ExtResource("4_x3yvh")
 [node name="Sprite2D" type="Sprite2D" parent="Sprite2D"]
 texture = SubResource("AtlasTexture_gg0f1")
 
-[node name="HealthComponent" parent="." instance=ExtResource("2_mlmyv")]
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("sprite_node") instance=ExtResource("2_mlmyv")]
+max_health = 16
+sprite_node = NodePath("../Sprite2D")
 
 [node name="ProtectionAreaComponent" parent="." instance=ExtResource("3_b4f68")]
 visible = false

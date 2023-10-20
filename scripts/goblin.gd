@@ -12,7 +12,6 @@ extends CharacterBody2D
 @onready var aggro_region : Area2D = $AggroRegion
 @onready var pathing : PathingComponent = $PathingComponent
 
-
 enum action {
 	IDLE,
 	ATTACK,

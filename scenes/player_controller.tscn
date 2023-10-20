@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" path="res://scripts/PlayerController.gd" id="1_5whgh"]
 [ext_resource type="PackedScene" uid="uid://d1t1in4621rg8" path="res://scenes/game_camera.tscn" id="2_hr8e3"]
-[ext_resource type="PackedScene" uid="uid://b7nxteqm0lwwk" path="res://scenes/ui.tscn" id="3_m16k2"]
+[ext_resource type="PackedScene" uid="uid://b7nxteqm0lwwk" path="res://scenes/ui/ui.tscn" id="3_m16k2"]
 
-[node name="PlayerController" type="Node2D"]
+[node name="PlayerController" type="Node2D" groups=["PlayerController"]]
 position = Vector2(-1, 0)
 script = ExtResource("1_5whgh")
 scroll_speed = 300

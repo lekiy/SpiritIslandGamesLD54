@@ -170,7 +170,7 @@ animation = &"walk_side"
 frame = 3
 frame_progress = 0.675284
 
-[node name="SelectionComponent" type="Area2D" parent="."]
+[node name="SelectionComponent" type="Area2D" parent="." groups=["Selectable"]]
 script = ExtResource("6_d0qoc")
 metadata/_edit_lock_ = true
 

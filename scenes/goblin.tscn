@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://hmw6evgpjwrw"]
+[gd_scene load_steps=29 format=3 uid="uid://hmw6evgpjwrw"]
 
 [ext_resource type="Script" path="res://scripts/goblin.gd" id="1_0ot34"]
 [ext_resource type="Texture2D" uid="uid://bta40y14hhg7y" path="res://assets/images/character/goblinb-Sheet.png" id="1_j3lhk"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://g0nlf15ylqh" path="res://assets/images/character/goblinR-Sheet.png" id="4_1yhmc"]
 [ext_resource type="Script" path="res://scripts/components/AggroRegion.gd" id="6_kx7hk"]
 [ext_resource type="PackedScene" uid="uid://b08sx1tqt8nq1" path="res://scenes/components/pathing_component.tscn" id="6_yn3e0"]
+[ext_resource type="Script" path="res://scripts/components/SelectionComponent.gd" id="8_acg28"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gbgmo"]
 atlas = ExtResource("1_j3lhk")
@@ -178,11 +179,11 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kx038"]
 size = Vector2(12, 12)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_fec7n"]
-size = Vector2(16, 16)
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_v4y1p"]
 radius = 53.0377
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jduen"]
+size = Vector2(16, 16)
 
 [node name="Goblin" type="CharacterBody2D"]
 collision_layer = 2
@@ -197,12 +198,6 @@ animation = &"idle_forward"
 position = Vector2(0, 4)
 shape = SubResource("RectangleShape2D_kx038")
 
-[node name="ClickRegion" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ClickRegion"]
-position = Vector2(0, 2)
-shape = SubResource("RectangleShape2D_fec7n")
-
 [node name="AggroRegion" type="Area2D" parent="."]
 collision_layer = 0
 script = ExtResource("6_kx7hk")
@@ -212,4 +207,14 @@ shape = SubResource("CircleShape2D_v4y1p")
 
 [node name="PathingComponent" parent="." instance=ExtResource("6_yn3e0")]
 
+[node name="SelectionComponent" type="Area2D" parent="."]
+script = ExtResource("8_acg28")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SelectionComponent"]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_jduen")
+
 [connection signal="body_exited" from="AggroRegion" to="AggroRegion" method="_on_body_exited"]
+[connection signal="mouse_entered" from="SelectionComponent" to="SelectionComponent" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="SelectionComponent" to="SelectionComponent" method="_on_mouse_exited"]
