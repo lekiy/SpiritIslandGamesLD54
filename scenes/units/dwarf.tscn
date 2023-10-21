@@ -172,6 +172,7 @@ frame_progress = 0.675284
 
 [node name="SelectionComponent" type="Area2D" parent="." groups=["Selectable"]]
 script = ExtResource("6_d0qoc")
+is_controlled_by_player = true
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SelectionComponent"]

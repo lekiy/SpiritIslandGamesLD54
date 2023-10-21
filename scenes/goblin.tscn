@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://hmw6evgpjwrw"]
+[gd_scene load_steps=30 format=3 uid="uid://hmw6evgpjwrw"]
 
 [ext_resource type="Script" path="res://scripts/goblin.gd" id="1_0ot34"]
 [ext_resource type="Texture2D" uid="uid://bta40y14hhg7y" path="res://assets/images/character/goblinb-Sheet.png" id="1_j3lhk"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://scripts/components/AggroRegion.gd" id="6_kx7hk"]
 [ext_resource type="PackedScene" uid="uid://b08sx1tqt8nq1" path="res://scenes/components/pathing_component.tscn" id="6_yn3e0"]
 [ext_resource type="Script" path="res://scripts/components/SelectionComponent.gd" id="8_acg28"]
+[ext_resource type="PackedScene" uid="uid://cggitff4yw6kv" path="res://scenes/components/health_component.tscn" id="9_s7hs4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gbgmo"]
 atlas = ExtResource("1_j3lhk")
@@ -185,7 +186,7 @@ radius = 53.0377
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jduen"]
 size = Vector2(16, 16)
 
-[node name="Goblin" type="CharacterBody2D"]
+[node name="Goblin" type="CharacterBody2D" groups=["Targetable"]]
 collision_layer = 2
 collision_mask = 7
 script = ExtResource("1_0ot34")
@@ -214,6 +215,9 @@ metadata/_edit_lock_ = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SelectionComponent"]
 position = Vector2(0, 2)
 shape = SubResource("RectangleShape2D_jduen")
+
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("sprite_node") instance=ExtResource("9_s7hs4")]
+sprite_node = NodePath("../AnimatedSprite2D")
 
 [connection signal="body_exited" from="AggroRegion" to="AggroRegion" method="_on_body_exited"]
 [connection signal="mouse_entered" from="SelectionComponent" to="SelectionComponent" method="_on_mouse_entered"]

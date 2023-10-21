@@ -26,6 +26,21 @@ layer_1/z_index = 0
 layer_1/tile_data = PackedInt32Array()
 script = ExtResource("2_vo4iv")
 
+[node name="GameCamera" parent="." groups=["PlayerController"] instance=ExtResource("3_t07h3")]
+z_as_relative = false
+position_smoothing_enabled = true
+position_smoothing_speed = 15.0
+scroll_speed = 500
+
+[node name="SelectionArea" type="Area2D" parent="GameCamera"]
+position = Vector2(0, 1)
+collision_layer = 0
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameCamera/SelectionArea"]
+position = Vector2(-11, -10)
+shape = SubResource("RectangleShape2D_dxr81")
+
 [node name="WorldGen" parent="." instance=ExtResource("3_45c3p")]
 width = 60
 height = 60
@@ -51,18 +66,3 @@ color = Color(0, 0, 0, 1)
 [node name="Fog" parent="." groups=["Fog"] instance=ExtResource("6_mdgtm")]
 z_as_relative = false
 position = Vector2(259, 262)
-
-[node name="GameCamera" parent="." instance=ExtResource("3_t07h3")]
-z_as_relative = false
-position_smoothing_enabled = true
-position_smoothing_speed = 15.0
-scroll_speed = 500
-
-[node name="SelectionArea" type="Area2D" parent="GameCamera"]
-position = Vector2(0, 1)
-collision_layer = 0
-collision_mask = 7
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="GameCamera/SelectionArea"]
-position = Vector2(-11, -10)
-shape = SubResource("RectangleShape2D_dxr81")
