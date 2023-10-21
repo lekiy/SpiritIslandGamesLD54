@@ -104,7 +104,19 @@ func fill_world():
 					set_cell(RESOURCE_LAYER, Vector2i(x, y), 1, Vector2i(randi_range(0, 4), 0))
 					astar.set_point_solid(Vector2i(x, y), true)
 
-				
+func update_pathing_map():
+	#reset map to path defaults
+	for x in map_width:
+		for y in map_height:
+			var floor_tile = world_gen.cell_map[x+y*map_width]
+			if(floor_tile):
+				astar.set_point_solid(Vector2i(x, y), false)
+				var stone = stone_gen.cell_map[x+y*map_width]
+				if(stone):
+					astar.set_point_solid(Vector2i(x, y), true)
+	var agents = get_tree().get_nodes_in_group("PathingAgent")
+	for agent in agents:
+		astar.set_point_solid(local_to_map(agent.get_parent().position), true)
 
 func add_spawn_area():
 	var spawn_tilemap = spawn_scene.instantiate()
@@ -130,6 +142,8 @@ func update_cell_terrain():
 			set_cells_terrain_connect(FLOOR_LAYER, [cell], 0, 0)
 
 func _process(_delta):
+	
+	update_pathing_map()
 	if(Input.is_action_just_pressed("spawn_dwarf")):
 		spawn_dwarf()
 

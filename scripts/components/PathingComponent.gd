@@ -8,7 +8,9 @@ var has_path = false
 
 var path_line: Line2D
 var draw_line = false
-
+var previous_tile : Vector2i
+	
+	
 func move_to_tile(target_tile_pos):
 	path = world.get_move_path(parent.position, target_tile_pos)
 	if(draw_line):
@@ -29,6 +31,8 @@ func get_direction_to_path() -> Vector2 :
 
 	var dir = parent.position.direction_to(path[path_index])
 	if(path.size() > 0 and parent.position.distance_to(path[path_index]) <= 1):
+		world.astar.set_point_solid(world.local_to_map(parent.position), false);
+		world.astar.set_point_solid(world.local_to_map(path[path_index]), true);
 		path_index+=1;
 		
 	return dir

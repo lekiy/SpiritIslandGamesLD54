@@ -39,7 +39,7 @@ var lifetime = 0;
 var action_state = action.IDLE
 var can_dig = true
 var dig_target
-var attack_target
+var attack_target : Node2D
 var aggro_target
 var can_attack = true
 var facing_direction = Vector2.DOWN
@@ -126,6 +126,9 @@ func _physics_process(_delta):
 		
 	if(aggro_region.current_target and !attack_target):
 		attack_target = aggro_region.current_target
+		
+	if(attack_target != null and attack_target.is_in_group("PlayerOwned")):
+		attack_target = null
 		
 	match action_state:
 		action.IDLE:

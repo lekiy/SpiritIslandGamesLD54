@@ -195,7 +195,7 @@ blend_mode = 2
 texture = ExtResource("6_6l45x")
 metadata/_edit_lock_ = true
 
-[node name="PathingComponent" parent="." instance=ExtResource("8_tla1e")]
+[node name="PathingComponent" parent="." groups=["PathingAgent"] instance=ExtResource("8_tla1e")]
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("sprite_node") instance=ExtResource("8_0jt37")]
 sprite_node = NodePath("../AnimatedSprite2D")
