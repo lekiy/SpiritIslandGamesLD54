@@ -12,7 +12,7 @@ func _ready():
 func _process(delta):
 	time+=delta
 	material.set("shader_parameter/time", time)
-	if(time >= 5.0+variation):
+	if(time >= 3.0+variation):
 		time = 0
 		variation= randf()
 		
