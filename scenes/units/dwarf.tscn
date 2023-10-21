@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://c80fvbsglni3n"]
+[gd_scene load_steps=30 format=3 uid="uid://c80fvbsglni3n"]
 
 [ext_resource type="Script" path="res://scripts/dwarf.gd" id="1_tk2xj"]
 [ext_resource type="Texture2D" uid="uid://cf3khct6h0rfl" path="res://assets/images/character/char-2b-Sheet.png" id="2_jdg20"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://letck8re1hot" path="res://assets/images/light.png" id="6_6l45x"]
 [ext_resource type="Script" path="res://scripts/components/SelectionComponent.gd" id="6_d0qoc"]
 [ext_resource type="PackedScene" uid="uid://cggitff4yw6kv" path="res://scenes/components/health_component.tscn" id="8_0jt37"]
+[ext_resource type="PackedScene" uid="uid://csngwlqiugcs7" path="res://scenes/components/aggro_region.tscn" id="8_6jfon"]
 [ext_resource type="PackedScene" uid="uid://b08sx1tqt8nq1" path="res://scenes/components/pathing_component.tscn" id="8_tla1e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_atarx"]
@@ -178,6 +179,9 @@ metadata/_edit_lock_ = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SelectionComponent"]
 position = Vector2(0, 2)
 shape = SubResource("RectangleShape2D_o0t12")
+
+[node name="AggroRegion" parent="." instance=ExtResource("8_6jfon")]
+collision_mask = 2
 
 [node name="Selector" type="Sprite2D" parent="."]
 position = Vector2(0, -14)

@@ -15,6 +15,7 @@ class_name Dwarf extends CharacterBody2D
 @onready var wall_selection_scene := preload("res://scenes/wall_selection.tscn")
 @onready var pathing : PathingComponent = $PathingComponent
 @onready var health : HealthComponent = $HealthComponent
+@onready var aggro_region := $AggroRegion
 # @onready var hurtbox : HurtboxComponent = $HurtboxComponent
 
 const WALL_TEX_COORD = Vector2i(1, 1)
@@ -39,6 +40,7 @@ var action_state = action.IDLE
 var can_dig = true
 var dig_target
 var attack_target
+var aggro_target
 var can_attack = true
 var facing_direction = Vector2.DOWN
 
@@ -122,7 +124,9 @@ func _physics_process(_delta):
 		wall_selection.polygon = ([origin, Vector2(origin.x+world.CELL_SIZE, origin.y), Vector2(origin.x+world.CELL_SIZE, origin.y+world.CELL_SIZE), Vector2(origin.x, origin.y+world.CELL_SIZE)])
 		wall_selection.visible = true;
 		
-	print(action_state)
+	if(aggro_region.current_target and !attack_target):
+		attack_target = aggro_region.current_target
+		
 	match action_state:
 		action.IDLE:
 			if(attack_target):
