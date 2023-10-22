@@ -36,7 +36,7 @@ func _input(event):
 			dragging = false
 			var nodes = get_tree().get_nodes_in_group("Selectable")
 			for node in nodes:
-				if(select_rect.has_point(node.global_position)):
+				if(select_rect.abs().has_point(node.global_position)):
 					if(node.is_controlled_by_player):
 						selected.append(node)
 						node.selected = true

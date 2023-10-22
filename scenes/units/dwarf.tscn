@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://letck8re1hot" path="res://assets/images/light.png" id="6_6l45x"]
 [ext_resource type="Script" path="res://scripts/components/SelectionComponent.gd" id="6_d0qoc"]
 [ext_resource type="PackedScene" uid="uid://cggitff4yw6kv" path="res://scenes/components/health_component.tscn" id="8_0jt37"]
-[ext_resource type="PackedScene" uid="uid://csngwlqiugcs7" path="res://scenes/components/aggro_region.tscn" id="8_6jfon"]
+[ext_resource type="PackedScene" path="res://scenes/components/aggro_region.tscn" id="8_6jfon"]
 [ext_resource type="PackedScene" uid="uid://b08sx1tqt8nq1" path="res://scenes/components/pathing_component.tscn" id="8_tla1e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_atarx"]

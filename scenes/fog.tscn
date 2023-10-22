@@ -27,8 +27,9 @@ shader_parameter/mask_positions = null
 shader_parameter/mask_scales = null
 shader_parameter/scroll1 = Vector2(-0.01, 0.01)
 shader_parameter/scroll2 = Vector2(0.01, -0.01)
-shader_parameter/distortion_strength = -0.015
-shader_parameter/top_color = Color(1, 0.572549, 1, 0.686275)
+shader_parameter/distortion_strength = -0.00499995
+shader_parameter/top_color = Color(1, 0.572549, 1, 0.784314)
+shader_parameter/brightness = 5.0
 shader_parameter/noise1 = SubResource("NoiseTexture2D_fw2n5")
 shader_parameter/noise2 = SubResource("NoiseTexture2D_h10l5")
 

@@ -1,8 +1,8 @@
 [gd_scene load_steps=12 format=3 uid="uid://dv0m5sk0vw06s"]
 
 [ext_resource type="Shader" path="res://scripts/shaders/shine.gdshader" id="1_uwouu"]
+[ext_resource type="Texture2D" uid="uid://c4hf1ekjcl5bq" path="res://assets/images/shine_fx.png" id="2_kcs30"]
 [ext_resource type="PackedScene" uid="uid://cggitff4yw6kv" path="res://scenes/components/health_component.tscn" id="2_mlmyv"]
-[ext_resource type="Texture2D" uid="uid://dfskqy84031cb" path="res://assets/images/shine_fx-export.png" id="2_q8yjb"]
 [ext_resource type="PackedScene" uid="uid://268orc1vxkw6" path="res://scenes/protection_area_component.tscn" id="3_b4f68"]
 [ext_resource type="Texture2D" uid="uid://c5a6pk4k0kg1j" path="res://assets/images/structures/crystal_large.png" id="3_jou2k"]
 [ext_resource type="Texture2D" uid="uid://letck8re1hot" path="res://assets/images/light.png" id="4_53ns6"]
@@ -15,7 +15,7 @@ shader = ExtResource("1_uwouu")
 shader_parameter/time = null
 shader_parameter/speed = 5.0
 shader_parameter/tint_color = Color(0, 1, 1, 1)
-shader_parameter/shine_texture = ExtResource("2_q8yjb")
+shader_parameter/shine_texture = ExtResource("2_kcs30")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_p27kv"]
 atlas = ExtResource("3_jou2k")
@@ -50,8 +50,9 @@ visible = false
 position = Vector2(-1, 0)
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-position = Vector2(-1, 0)
-color = Color(0.670588, 1, 1, 1)
+visible = false
+position = Vector2(-1, 3)
+color = Color(0.733333, 1, 1, 1)
 blend_mode = 2
 texture = ExtResource("4_53ns6")
 texture_scale = 0.5
