@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://c80fvbsglni3n"]
+[gd_scene load_steps=35 format=3 uid="uid://c80fvbsglni3n"]
 
 [ext_resource type="Script" path="res://scripts/dwarf.gd" id="1_tk2xj"]
 [ext_resource type="Texture2D" uid="uid://cf3khct6h0rfl" path="res://assets/images/character/char-2b-Sheet.png" id="2_jdg20"]
@@ -148,11 +148,34 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o0t12"]
 size = Vector2(16, 16)
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_llq6l"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_5af3a"]
+
+[sub_resource type="Gradient" id="Gradient_vn2ex"]
+offsets = PackedFloat32Array(0, 0.359259, 0.648148, 0.97037)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_8rnk6"]
+gradient = SubResource("Gradient_vn2ex")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_c4ya5"]
+emission_shape = 1
+emission_sphere_radius = 8.0
+particle_flag_disable_z = true
+gravity = Vector3(0, -20, 0)
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+color = Color(0.207843, 0, 0.447059, 1)
+color_ramp = SubResource("GradientTexture1D_8rnk6")
+color_initial_ramp = SubResource("GradientTexture1D_5af3a")
+
 [node name="Dwarf" type="CharacterBody2D" groups=["Dwarf", "PlayerOwned"]]
 collision_mask = 7
 script = ExtResource("1_tk2xj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, 4)
 shape = SubResource("RectangleShape2D_atarx")
 metadata/_edit_lock_ = true
@@ -172,6 +195,7 @@ frame = 3
 frame_progress = 0.675284
 
 [node name="SelectionComponent" type="Area2D" parent="." groups=["Selectable"]]
+visible = false
 script = ExtResource("6_d0qoc")
 is_controlled_by_player = true
 metadata/_edit_lock_ = true
@@ -181,6 +205,7 @@ position = Vector2(0, 2)
 shape = SubResource("RectangleShape2D_o0t12")
 
 [node name="AggroRegion" parent="." instance=ExtResource("8_6jfon")]
+visible = false
 collision_mask = 2
 
 [node name="Selector" type="Sprite2D" parent="."]
@@ -189,6 +214,7 @@ texture = ExtResource("3_ed2gd")
 metadata/_edit_lock_ = true
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
+visible = false
 scale = Vector2(0.1, 0.1)
 energy = 0.5
 blend_mode = 2
@@ -199,6 +225,11 @@ metadata/_edit_lock_ = true
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("sprite_node") instance=ExtResource("8_0jt37")]
 sprite_node = NodePath("../AnimatedSprite2D")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_llq6l")
+amount = 4
+process_material = SubResource("ParticleProcessMaterial_c4ya5")
 
 [connection signal="tree_exited" from="." to="." method="_on_tree_exited"]
 [connection signal="mouse_entered" from="SelectionComponent" to="SelectionComponent" method="_on_mouse_entered"]
