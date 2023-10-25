@@ -21,14 +21,20 @@ func move_to_tile(target_tile_pos):
 	else:
 		has_path = false
 		#may need to force stop movement here
-
+		
+#Not working atm
+func varify_path_to_tile(target_tile):
+	if(path.size() > path_index):
+		if(world.astar.is_point_solid(world.local_to_map(path[path_index]))):
+			move_to_tile(target_tile)
 
 func get_direction_to_path() -> Vector2 :
+	
 	if(path_index >= path.size()):
 		has_path = false;
 		path_index = 0;
 		return Vector2.ZERO
-
+	
 	var dir = parent.position.direction_to(path[path_index])
 	if(path.size() > 0 and parent.position.distance_to(path[path_index]) <= 1):
 		world.astar.set_point_solid(world.local_to_map(parent.position), false);

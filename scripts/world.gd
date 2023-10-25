@@ -194,15 +194,14 @@ func get_world_map_center():
 
 func get_move_path(start: Vector2, target: Vector2):
 	var type = get_cell_atlas_coords(FLOOR_LAYER, local_to_map(target))
-#	if(type == WALL_TEX_COORD):
-#		var neighbors = get_surrounding_cells(local_to_map(target))
-#		neighbors.sort_custom(func(a, b): return start.distance_to(map_to_local(a)) < start.distance_to(map_to_local(b)))
-#		for cell in neighbors:
-#			if(get_cell_atlas_coords(FLOOR_LAYER, cell) != WALL_TEX_COORD):
-#				return astar.get_point_path(local_to_map(start), cell)
-#		return [];
-#	else:
-	return astar.get_point_path(local_to_map(start), local_to_map(target))
+	var path = astar.get_point_path(local_to_map(start), local_to_map(target))
+	if(path.size() > 0):
+		return path
+	if(local_to_map(start) == local_to_map(target)):
+		return []
+		
+	var direction = target.direction_to(start)*CELL_SIZE
+	return get_move_path(start, target+direction)
 		
 
 func get_tile(target):

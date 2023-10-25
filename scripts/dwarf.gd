@@ -46,6 +46,7 @@ var facing_direction = Vector2.DOWN
 
 var path_line: Line2D
 var wall_selection: Polygon2D
+var target_tile
 
 func _ready():
 	path_line = path_line_scene.instantiate()
@@ -73,6 +74,7 @@ func _input(event):
 				
 			action_state = action.MOVE
 			pathing.move_to_tile(target_pos)
+
 
 func get_dwarf_name():
 	var names = [
