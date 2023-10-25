@@ -201,7 +201,35 @@ func get_move_path(start: Vector2, target: Vector2):
 		return []
 		
 	var direction = target.direction_to(start)*CELL_SIZE
+	var open_cells = []
+	
+	if(!astar.is_point_solid(local_to_map(target)+Vector2i.DOWN)):
+		open_cells.append(target+Vector2.DOWN*CELL_SIZE)
+	if(!astar.is_point_solid(local_to_map(target)+Vector2i.UP)):
+		open_cells.append((target)+Vector2.UP*CELL_SIZE)
+	if(!astar.is_point_solid(local_to_map(target)+Vector2i.LEFT)):
+		open_cells.append((target)+Vector2.LEFT*CELL_SIZE)
+	if(!astar.is_point_solid(local_to_map(target)+Vector2i.RIGHT)):
+		open_cells.append((target)+Vector2.RIGHT*CELL_SIZE)
+		
+	if(open_cells.size() == 0):
+		print("returning size of 0")
+		return get_move_path(start, target+direction)
+	if(open_cells.size() == 1):
+		print("returning size of 1")
+		path = astar.get_point_path(local_to_map(start), local_to_map(open_cells[0]))
+		if(path.size() > 0):
+			return path
+	elif(open_cells.size() > 1):
+		open_cells.sort_custom(func(a, b): return target.distance_to(a) < target.distance_to(b))
+		for cell in open_cells:
+			path = astar.get_point_path(local_to_map(start), local_to_map(cell))
+			if(path.size() > 0):
+				return path
+		
+		
 	return get_move_path(start, target+direction)
+	
 		
 
 func get_tile(target):
