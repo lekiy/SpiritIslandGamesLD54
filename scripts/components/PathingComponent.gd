@@ -44,7 +44,6 @@ func get_direction_to_path() -> Vector2 :
 		if(world.astar.is_point_solid(world.local_to_map(path[path_index]))):
 			move_to_tile()
 	
-	print(has_path, target_position)
 	if(!has_path): return Vector2.ZERO
 	
 	var dir = parent.position.direction_to(path[path_index])

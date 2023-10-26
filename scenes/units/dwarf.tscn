@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://c80fvbsglni3n"]
+[gd_scene load_steps=37 format=3 uid="uid://c80fvbsglni3n"]
 
 [ext_resource type="Script" path="res://scripts/dwarf.gd" id="1_tk2xj"]
 [ext_resource type="Texture2D" uid="uid://cf3khct6h0rfl" path="res://assets/images/character/char-2b-Sheet.png" id="2_jdg20"]
@@ -12,6 +12,8 @@
 [ext_resource type="PackedScene" uid="uid://cggitff4yw6kv" path="res://scenes/components/health_component.tscn" id="8_0jt37"]
 [ext_resource type="PackedScene" path="res://scenes/components/aggro_region.tscn" id="8_6jfon"]
 [ext_resource type="PackedScene" uid="uid://b08sx1tqt8nq1" path="res://scenes/components/pathing_component.tscn" id="8_tla1e"]
+[ext_resource type="Material" uid="uid://dgpsvv41loc40" path="res://scenes/units/outline.material" id="9_q13hc"]
+[ext_resource type="Script" path="res://scripts/components/OutlineFX.gd" id="10_e0bou"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_atarx"]
 size = Vector2(12, 12)
@@ -207,6 +209,10 @@ shape = SubResource("RectangleShape2D_o0t12")
 [node name="AggroRegion" parent="." instance=ExtResource("8_6jfon")]
 visible = false
 collision_mask = 2
+
+[node name="OutlineFX" type="Sprite2D" parent="."]
+material = ExtResource("9_q13hc")
+script = ExtResource("10_e0bou")
 
 [node name="Selector" type="Sprite2D" parent="."]
 position = Vector2(0, -14)
