@@ -65,4 +65,4 @@ color = Color(0, 0, 0, 1)
 
 [node name="Fog" parent="." groups=["Fog"] instance=ExtResource("6_mdgtm")]
 z_as_relative = false
-position = Vector2(259, 262)
+position = Vector2(0, -8)

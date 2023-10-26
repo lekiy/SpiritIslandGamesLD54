@@ -10,7 +10,7 @@ const ATLAS = 0
 
 const WALL_TEX_COORD = Vector2i(0, 2)
 const FLOOR_TEX_COORD = Vector2i(1, 4)
-const CELL_SIZE = 20
+const CELL_SIZE = 20.0
 
 @onready var camera := $GameCamera
 # @onready var line = $Line2D
@@ -193,45 +193,38 @@ func get_world_map_center():
 	return Vector2(map_width*0.5, map_height*0.5)
 
 func get_move_path(start: Vector2, target: Vector2):
-	var type = get_cell_atlas_coords(FLOOR_LAYER, local_to_map(target))
+	if(local_to_map(start) == local_to_map(target)):
+		return []
 	var path = astar.get_point_path(local_to_map(start), local_to_map(target))
 	if(path.size() > 0):
 		return path
-	if(local_to_map(start) == local_to_map(target)):
-		return []
 		
 	var direction = target.direction_to(start)*CELL_SIZE
 	var open_cells = []
 	
-	if(!astar.is_point_solid(local_to_map(target)+Vector2i.DOWN)):
-		open_cells.append(target+Vector2.DOWN*CELL_SIZE)
-	if(!astar.is_point_solid(local_to_map(target)+Vector2i.UP)):
-		open_cells.append((target)+Vector2.UP*CELL_SIZE)
-	if(!astar.is_point_solid(local_to_map(target)+Vector2i.LEFT)):
-		open_cells.append((target)+Vector2.LEFT*CELL_SIZE)
-	if(!astar.is_point_solid(local_to_map(target)+Vector2i.RIGHT)):
-		open_cells.append((target)+Vector2.RIGHT*CELL_SIZE)
+	var directions = [Vector2i.UP, Vector2i.DOWN, Vector2i.LEFT, Vector2i.RIGHT]
+	
+	for dir in directions:
+		if(local_to_map(target)+dir == local_to_map(start)):
+			return []
+	
+	for dir in directions:
+		if(!astar.is_point_solid(local_to_map(target)+dir)):
+			open_cells.append(target+(dir*CELL_SIZE))
 		
 	if(open_cells.size() == 0):
-		print("returning size of 0")
 		return get_move_path(start, target+direction)
-	if(open_cells.size() == 1):
-		print("returning size of 1")
-		path = astar.get_point_path(local_to_map(start), local_to_map(open_cells[0]))
-		if(path.size() > 0):
-			return path
-	elif(open_cells.size() > 1):
-		open_cells.sort_custom(func(a, b): return target.distance_to(a) < target.distance_to(b))
+	elif(open_cells.size() > 0):
+		open_cells.sort_custom(func(a, b): return start.distance_to(a) < start.distance_to(b))
+		print(open_cells)
 		for cell in open_cells:
 			path = astar.get_point_path(local_to_map(start), local_to_map(cell))
 			if(path.size() > 0):
 				return path
 		
-		
 	return get_move_path(start, target+direction)
 	
 		
-
 func get_tile(target):
 	return get_cell_tile_data(FLOOR_LAYER, local_to_map(target))
 	
