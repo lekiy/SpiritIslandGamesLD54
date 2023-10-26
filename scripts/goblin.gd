@@ -50,7 +50,7 @@ func _process(_delta):
 				action_state = action.IDLE
 			elif(global_position.distance_to(aggro_region.current_target.global_position) > attack_range):
 				action_state = action.MOVE
-				pathing.move_to_tile(aggro_region.current_target.global_position)
+				pathing.set_target(aggro_region.current_target.global_position)
 			else:
 				pathing.clear_path()
 				attack(aggro_region.current_target)

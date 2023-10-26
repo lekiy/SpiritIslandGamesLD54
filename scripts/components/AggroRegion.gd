@@ -2,7 +2,7 @@ extends Area2D
 
 var current_target = null;
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if(!current_target):
 		var bodies = get_overlapping_bodies()
 		var closest = null

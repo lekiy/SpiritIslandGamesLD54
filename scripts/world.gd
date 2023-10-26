@@ -216,7 +216,6 @@ func get_move_path(start: Vector2, target: Vector2):
 		return get_move_path(start, target+direction)
 	elif(open_cells.size() > 0):
 		open_cells.sort_custom(func(a, b): return start.distance_to(a) < start.distance_to(b))
-		print(open_cells)
 		for cell in open_cells:
 			path = astar.get_point_path(local_to_map(start), local_to_map(cell))
 			if(path.size() > 0):

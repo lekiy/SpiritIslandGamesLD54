@@ -73,7 +73,7 @@ func _input(event):
 				dig_target = target_pos
 				
 			action_state = action.MOVE
-			pathing.move_to_tile(target_pos)
+			pathing.set_target(target_pos)
 
 
 func get_dwarf_name():
@@ -132,22 +132,27 @@ func _physics_process(_delta):
 	if(attack_target != null and attack_target.is_in_group("PlayerOwned")):
 		attack_target = null
 		
+	print(action_state)
+		
 	match action_state:
 		action.IDLE:
 			if(attack_target):
 				action_state = action.ATTACK
+			elif(pathing.get_target()):
+				action_state = action.MOVE
 			velocity = Vector2.ZERO
 			wall_selection.visible = false;
 			set_anim_direction("idle")
 		action.MOVE:
 			if(attack_target and global_position.distance_to(attack_target.global_position) < attack_range):
 				action_state = action.ATTACK
-			if(pathing.has_path):
+			if(pathing.get_target()):
 				velocity = pathing.get_direction_to_path() * move_speed
-				# sprite.rotation = deg_to_rad(pingpong(lifetime*2, 10)-5)
-				set_facing_direction()
-				set_anim_direction("walk")
-				
+				if(velocity != Vector2.ZERO):
+					set_facing_direction()
+					set_anim_direction("walk")
+				else:
+					action_state = action.IDLE
 			else:
 				sprite.rotation = 0
 				path_line.points = []
@@ -172,7 +177,7 @@ func _physics_process(_delta):
 				action_state = action.IDLE
 			elif(global_position.distance_to(attack_target.global_position) > attack_range):
 				action_state = action.MOVE
-				pathing.move_to_tile(attack_target.global_position)
+				pathing.set_target(attack_target.global_position)
 			else:
 				pathing.clear_path()
 				attack(attack_target)
