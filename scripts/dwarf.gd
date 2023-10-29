@@ -87,7 +87,8 @@ func get_dwarf_name():
 		"Grizzly",
 		"Todard",
 		"Pagruph",
-		"Balgruff"
+		"Balgruff",
+		"Coslyn"
 	]
 
 	names.shuffle()
@@ -131,13 +132,14 @@ func _physics_process(_delta):
 		
 	if(attack_target != null and attack_target.is_in_group("PlayerOwned")):
 		attack_target = null
-		
-	print(action_state)
-		
+	
+	
 	match action_state:
 		action.IDLE:
 			if(attack_target):
 				action_state = action.ATTACK
+			elif(dig_target):
+				action_state = action.DIG
 			elif(pathing.get_target()):
 				action_state = action.MOVE
 			velocity = Vector2.ZERO
@@ -146,6 +148,8 @@ func _physics_process(_delta):
 		action.MOVE:
 			if(attack_target and global_position.distance_to(attack_target.global_position) < attack_range):
 				action_state = action.ATTACK
+			if(dig_target and global_position.distance_to(world.map_to_local(world.local_to_map(dig_target))) <= attack_range):
+				action_state = action.DIG
 			if(pathing.get_target()):
 				velocity = pathing.get_direction_to_path() * move_speed
 				if(velocity != Vector2.ZERO):
@@ -156,14 +160,13 @@ func _physics_process(_delta):
 			else:
 				sprite.rotation = 0
 				path_line.points = []
-				if(dig_target):
-					action_state = action.DIG
-				else:
-					action_state = action.IDLE
+				action_state = action.IDLE
 		action.DIG:
 			if(!dig_target):
 				action_state = action.IDLE
 			else:
+				if(dig_target and global_position.distance_to(world.map_to_local(world.local_to_map(dig_target))) > attack_range):
+					action_state = action.MOVE
 				if(can_dig):
 					var remainder = world.dig_tile(dig_target, dig_strength)
 					can_dig = false;

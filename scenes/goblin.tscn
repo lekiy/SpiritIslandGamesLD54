@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://hmw6evgpjwrw"]
+[gd_scene load_steps=31 format=3 uid="uid://hmw6evgpjwrw"]
 
 [ext_resource type="Script" path="res://scripts/goblin.gd" id="1_0ot34"]
 [ext_resource type="Texture2D" uid="uid://bta40y14hhg7y" path="res://assets/images/character/goblinb-Sheet.png" id="1_j3lhk"]
@@ -9,6 +9,8 @@
 [ext_resource type="PackedScene" uid="uid://b08sx1tqt8nq1" path="res://scenes/components/pathing_component.tscn" id="6_yn3e0"]
 [ext_resource type="Script" path="res://scripts/components/SelectionComponent.gd" id="8_acg28"]
 [ext_resource type="PackedScene" uid="uid://cggitff4yw6kv" path="res://scenes/components/health_component.tscn" id="9_s7hs4"]
+[ext_resource type="PackedScene" uid="uid://dd541dsfcmeu8" path="res://scenes/components/state_machine.tscn" id="10_7tjvd"]
+[ext_resource type="Script" path="res://scripts/states/EnemyIdle.gd" id="11_53ji4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gbgmo"]
 atlas = ExtResource("1_j3lhk")
@@ -210,6 +212,14 @@ shape = SubResource("RectangleShape2D_jduen")
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("sprite_node") instance=ExtResource("9_s7hs4")]
 sprite_node = NodePath("../AnimatedSprite2D")
+
+[node name="StateMachine" parent="." node_paths=PackedStringArray("initial_state") instance=ExtResource("10_7tjvd")]
+initial_state = NodePath("EnemyIdle")
+
+[node name="EnemyIdle" type="Node" parent="StateMachine" node_paths=PackedStringArray("enemy", "pathing_agent")]
+script = ExtResource("11_53ji4")
+enemy = NodePath("../..")
+pathing_agent = NodePath("../../PathingComponent")
 
 [connection signal="mouse_entered" from="SelectionComponent" to="SelectionComponent" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="SelectionComponent" to="SelectionComponent" method="_on_mouse_exited"]

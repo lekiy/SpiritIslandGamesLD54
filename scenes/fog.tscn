@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://b1kj2fjb5byvp"]
 
 [ext_resource type="Shader" path="res://scenes/mist.gdshader" id="1_nnine"]
-[ext_resource type="Script" path="res://scripts/fog.gd" id="2_xngku"]
+[ext_resource type="Script" path="res://scripts/fx/fog.gd" id="2_xngku"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_ld6ju"]
 

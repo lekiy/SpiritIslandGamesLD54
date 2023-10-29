@@ -37,7 +37,7 @@ var dwarves_count = 0
 
 signal dwarf_count_changed()
 
-var tile_durability_matrix
+var tile_properties = {}
 var mouse_position
 
 const dirs = [Vector2.UP, Vector2.DOWN, Vector2.LEFT, Vector2.RIGHT]
@@ -66,23 +66,23 @@ func _ready():
 	fog.texture.height = map_height*CELL_SIZE
 	fog.z_index = RenderingServer.CANVAS_ITEM_Z_MAX-1
 	crystal.position = map_to_local(Vector2(map_width*0.5, map_height*0.5))
-	setup_durability_matrix()
+#	setup_durability_matrix()
 
 func _input(event):
 	if(event is InputEventMouse):
 		mouse_position = event.position
 
-func setup_durability_matrix():
-	var matrix = []
-	for x in map_width:
-		matrix.append([])
-		for y in map_height:
-			var tile_data = get_cell_tile_data(FLOOR_LAYER, Vector2i(x, y))
-			if(tile_data):
-				matrix[x].append(tile_data.get_custom_data("Durability"))
-			else:
-				matrix[x].append(0)
-	tile_durability_matrix = matrix
+#func setup_durability_matrix():
+#	var matrix = []
+#	for x in map_width:
+#		matrix.append([])
+#		for y in map_height:
+#			var tile_data = get_cell_tile_data(FLOOR_LAYER, Vector2i(x, y))
+#			if(tile_data):
+#				matrix[x].append(tile_data.get_custom_data("Durability"))
+#			else:
+#				matrix[x].append(0)
+#	tile_durability_matrix = matrix
 	
 
 func fill_world():
@@ -229,18 +229,21 @@ func get_tile(target):
 	
 func dig_tile(target: Vector2, dig_damage):
 	var tile = local_to_map(target)
-	var durability_value = tile_durability_matrix[tile.x][tile.y]
-	tile_durability_matrix[tile.x][tile.y] -= dig_damage
-	durability_value -= dig_damage
-
-	if(durability_value == 6):
-		var fx = break_fx.instantiate()
-		fx.position = map_to_local(tile)
-		add_child(fx)
-
-	if(durability_value <= 0):
-		destroy_tile(local_to_map(target))
-	return durability_value
+	if(!tile_properties.has(tile)):
+		tile_properties[tile] = get_cell_tile_data(FLOOR_LAYER, tile)
+	var durability_value = tile_properties[tile]
+	print(durability_value)
+#	tile_durability_matrix[tile.x][tile.y] -= dig_damage
+#	durability_value -= dig_damage
+#
+#	if(durability_value == 6):
+#		var fx = break_fx.instantiate()
+#		fx.position = map_to_local(tile)
+#		add_child(fx)
+#
+#	if(durability_value <= 0):
+#		destroy_tile(local_to_map(target))
+	return 1
 
 func destroy_tile(target_cell):
 	var tile_type = get_cell_atlas_coords(FLOOR_LAYER, target_cell)

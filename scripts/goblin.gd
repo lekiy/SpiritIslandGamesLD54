@@ -26,38 +26,44 @@ var facing_direction = Vector2.DOWN
 var lifetime = 0;
 var can_attack = true
 
-func _process(_delta):
-	match action_state:
-		action.IDLE:
-			if(aggro_region.current_target):
-				action_state = action.ATTACK
-
-			velocity = Vector2.ZERO
-			set_anim_direction("idle")
-			
-		action.MOVE:
-			if(aggro_region.current_target and global_position.distance_to(aggro_region.current_target.global_position) < attack_range):
-				action_state = action.ATTACK
-			if(pathing.has_path):
-				velocity = pathing.get_direction_to_path()*move_speed
-				# sprite.rotation = deg_to_rad(pingpong(lifetime*2, 10)-5)
-				set_facing_direction()
-				set_anim_direction("walk")
-			else:
-				action_state = action.IDLE
-		action.ATTACK:
-			if(!aggro_region.current_target or !can_attack):
-				action_state = action.IDLE
-			elif(global_position.distance_to(aggro_region.current_target.global_position) > attack_range):
-				action_state = action.MOVE
-				pathing.set_target(aggro_region.current_target.global_position)
-			else:
-				pathing.clear_path()
-				attack(aggro_region.current_target)
-
-
-func _physics_process(_delta):				
+#func _process(_delta):
+#	match action_state:
+#		action.IDLE:
+#			if(aggro_region.current_target):
+#				action_state = action.ATTACK
+#
+#			velocity = Vector2.ZERO
+#			set_anim_direction("idle")
+#
+#		action.MOVE:
+#			if(aggro_region.current_target and global_position.distance_to(aggro_region.current_target.global_position) < attack_range):
+#				action_state = action.ATTACK
+#			if(pathing.has_path):
+#				velocity = pathing.get_direction_to_path()*move_speed
+#				# sprite.rotation = deg_to_rad(pingpong(lifetime*2, 10)-5)
+#				set_facing_direction()
+#				set_anim_direction("walk")
+#			else:
+#				action_state = action.IDLE
+#		action.ATTACK:
+#			if(!aggro_region.current_target or !can_attack):
+#				action_state = action.IDLE
+#			elif(global_position.distance_to(aggro_region.current_target.global_position) > attack_range):
+#				action_state = action.MOVE
+#				pathing.set_target(aggro_region.current_target.global_position)
+#			else:
+#				pathing.clear_path()
+#				attack(aggro_region.current_target)
+#
+#
+func _physics_process(delta):
 	move_and_slide()
+	set_facing_direction()
+	
+	if(velocity.x != 0 or velocity.y != 0):
+		set_anim_direction("walk")
+	else:
+		set_anim_direction("idle")
 
 
 func _input(event):

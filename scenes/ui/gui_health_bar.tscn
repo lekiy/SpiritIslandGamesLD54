@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://c8wnkiq0jtgxj"]
 
-[ext_resource type="Script" path="res://scripts/GuiHealthBar.gd" id="1_iam6h"]
+[ext_resource type="Script" path="res://scripts/ui/GuiHealthBar.gd" id="1_iam6h"]
 
 [node name="GuiHealthBar" type="HBoxContainer"]
 theme_override_constants/separation = 1
