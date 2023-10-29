@@ -1,4 +1,4 @@
-extends Area2D
+class_name AggroRegion extends Area2D
 
 var current_target = null;
 

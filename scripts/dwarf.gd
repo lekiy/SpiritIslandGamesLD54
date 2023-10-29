@@ -146,8 +146,9 @@ func _physics_process(_delta):
 			wall_selection.visible = false;
 			set_anim_direction("idle")
 		action.MOVE:
-			if(attack_target and global_position.distance_to(attack_target.global_position) < attack_range):
-				action_state = action.ATTACK
+			if(attack_target):
+				if(global_position.distance_to(attack_target.global_position) < attack_range):
+					action_state = action.ATTACK
 			if(dig_target and global_position.distance_to(world.map_to_local(world.local_to_map(dig_target))) <= attack_range):
 				action_state = action.DIG
 			if(pathing.get_target()):

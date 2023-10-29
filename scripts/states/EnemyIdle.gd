@@ -1,13 +1,13 @@
-class_name EnemyIdle extends State
+class_name Idle extends State
 
 @export var enemy: CharacterBody2D
 @export var pathing_agent: PathingComponent
+@export var aggro_range: AggroRegion
 @export var move_speed := 20.0
 @export var wander_distance := 100.0
 
 var move_target : Vector2
 var wander_time : float
-
 
 func randomize_wander():
 		if(enemy):
@@ -20,6 +20,9 @@ func enter():
 	randomize_wander()
 	
 func update(delta: float):
+	if(aggro_range.current_target):
+		transitioned.emit(self, "chase")
+	
 	if(wander_time > 0):
 		wander_time -= delta
 		
